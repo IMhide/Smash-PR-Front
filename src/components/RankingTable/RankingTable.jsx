@@ -7,7 +7,7 @@ const template = () => {
     <Card>
       <CardHeader title='Ranking' />
       <CardContent>
-        <TableContainer component={Paper}>
+        <TableContainer>
           <Table aria-label="simple table">
             <TableHead>
               <TableRow>

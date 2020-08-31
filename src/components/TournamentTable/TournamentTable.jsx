@@ -2,12 +2,12 @@ import "./TournamentTable.css";
 import React from "react";
 import { Card, CardContent, CardHeader, TableContainer, Paper, Table, TableHead, TableCell, TableBody, TableRow } from "@material-ui/core";
 
-function template() {
+const template = ({classes}) => {
   return (
-    <Card>
-      <CardHeader title='Ranking' />
+    <Card className={classes.tournamentBox}>
+      <CardHeader title='Tournois' />
       <CardContent>
-        <TableContainer component={Paper}>
+        <TableContainer >
           <Table aria-label="simple table">
             <TableHead>
               <TableRow>
