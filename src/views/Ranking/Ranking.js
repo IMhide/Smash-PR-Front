@@ -1,29 +1,34 @@
-import React from "react";
+import { useEffect, useState } from "react"
 import template from "./Ranking.jsx";
 import getCircuitRanking from 'lib/getCircuitRanking.js'
 import getCircuitTournaments from 'lib/getCircuitTournaments.js'
 
 const Ranking = () => {
-  const [rankingState, setRankingState] = React.useState('initial')
-  const [ranking, setRanking] = React.useState([])
-  const [tournamentsState, setTournamentsState] = React.useState('initial')
-  const [tournaments, setTournaments] = React.useState([])
-  const [search, setSearch] = React.useState('')
-  const [placement, setPlacement] = React.useState(false)
+  const [rankingState, setRankingState] = useState('initial')
+  const [ranking, setRanking] = useState([])
+  const [cachedRanking, setCachedRanking] = useState([])
+  const [tournamentsState, setTournamentsState] = useState('initial')
+  const [tournaments, setTournaments] = useState([])
+  const [search, setSearch] = useState('')
+  const [placement, setPlacement] = useState(false)
 
-
-  React.useEffect(() => {
+  useEffect(() => {
     setRankingState('pending')
-    setTournamentsState('pending')
 
-    getCircuitRanking(1).then((response) => {
+    getCircuitRanking(1, placement).then((response) => {
+      setCachedRanking(response.data.data)
       setRanking(response.data.data)
+      setSearch('')
       setRankingState('success')
     }).catch((error) => {
       setRankingState('error')
       console.log('Something Went Wrong')
       console.log(error)
     })
+  }, [placement])
+
+  useEffect(() => {
+    setTournamentsState('pending')
 
     getCircuitTournaments(1).then((response) => {
       setTournamentsState('success')
@@ -35,7 +40,23 @@ const Ranking = () => {
     })
   }, [])
 
-  return template({ ranking, rankingState, tournaments, tournamentsState });
+  const handleSearch = (e) => {
+    const tmp = e.target.value
+    setSearch(tmp)
+    if (tmp.length > 0){
+      const filteredRanking = cachedRanking.filter((player) => (player['name'].toLowerCase().includes(tmp.toLowerCase())))     
+      setRanking(filteredRanking)
+    }
+    else{
+      setRanking(cachedRanking)
+    }
+  }
+
+  const handlePlacement = () => {
+    console.log('SALAM')
+    setPlacement(!placement)
+  }
+  return template({ ranking, rankingState, tournaments, tournamentsState, search, placement, handlePlacement, handleSearch });
 }
 
 export default Ranking;

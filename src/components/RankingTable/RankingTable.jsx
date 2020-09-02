@@ -25,7 +25,7 @@ const template = ({ displayedRanking, page, handleChangePage, total}) => {
         <TableFooter>
           <TableRow>
             <TablePagination 
-              rowsPerPageOptions={false}
+              rowsPerPageOptions={[]}
               count={total}
               rowsPerPage={50}
               page={page}

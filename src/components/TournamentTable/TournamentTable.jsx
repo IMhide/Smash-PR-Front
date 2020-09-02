@@ -28,7 +28,7 @@ const template = ({ classes, displayedTournaments, page, total, handleChangePage
             <TableFooter>
               <TableRow>
                 <TablePagination
-                  rowsPerPageOptions={false}
+                  rowsPerPageOptions={[]}
                   count={total}
                   rowsPerPage={5}
                   page={page}
