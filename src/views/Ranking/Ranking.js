@@ -53,7 +53,6 @@ const Ranking = () => {
   }
 
   const handlePlacement = () => {
-    console.log('SALAM')
     setPlacement(!placement)
   }
   return template({ ranking, rankingState, tournaments, tournamentsState, search, placement, handlePlacement, handleSearch });
