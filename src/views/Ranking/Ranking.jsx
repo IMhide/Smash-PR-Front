@@ -5,13 +5,13 @@ import RankingTable from 'components/RankingTable'
 import RankingSearch from 'components/RankingSearch'
 import TournamentTable from 'components/TournamentTable'
 
-function template({ classes, ranking, rankingState, tournaments, tournamentsState, search, placement, handleSearch, handlePlacement }) {
+function template({ classes, ranking, rankingState, tournaments, tournamentsState, search, placement, handleSearch, handlePlacement, rankingName }) {
   return (
     <div className="ranking">
       <Grid container spacing={3}>
         <Grid item md={8}>
           <Card>
-            <CardHeader title='Ranking' />
+            <CardHeader title={rankingName} />
             <CardContent>
               <RankingTable ranking={ranking} state={rankingState} />
             </CardContent>

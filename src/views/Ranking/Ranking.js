@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core'
 import template from "./Ranking.jsx";
 import getCircuitRanking from 'lib/getCircuitRanking.js'
 import getCircuitTournaments from 'lib/getCircuitTournaments.js'
+import getCircuit from 'lib/getCircuit.js'
 import { useParams } from "react-router-dom";
 
 const useStyle = makeStyles((theme) => (
@@ -16,8 +17,10 @@ const useStyle = makeStyles((theme) => (
 
 const Ranking = () => {
   const { id } = useParams() 
-  const [rankingId, setRankingId] = useState(id || 1)  
   const classes = useStyle()
+
+  const [rankingId, setRankingId] = useState(id || 1)  
+  const [rankingName, setRankingName] = useState('ranking')  
   const [rankingState, setRankingState] = useState('initial')
   const [ranking, setRanking] = useState([])
   const [cachedRanking, setCachedRanking] = useState([])
@@ -30,6 +33,17 @@ const Ranking = () => {
   useEffect(()=> {
     setRankingId(id)    
   })
+
+
+  useEffect(() => {
+
+    getCircuit(rankingId).then((response) => {
+      const name = response.data.name
+      const tier = response.data.category
+      setRankingName(`Ranking ${name} - ${tier}`)
+    })
+
+  }, [rankingId])
 
   useEffect(() => {
     setRankingState('pending')
@@ -74,7 +88,7 @@ const Ranking = () => {
   const handlePlacement = () => {
     setPlacement(!placement)
   }
-  return template({ classes, ranking, rankingState, tournaments, tournamentsState, search, placement, handlePlacement, handleSearch });
+  return template({ classes, ranking, rankingState, tournaments, tournamentsState, search, placement, handlePlacement, handleSearch, rankingName });
 }
 
 export default Ranking;
