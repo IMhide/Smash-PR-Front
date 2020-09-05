@@ -5,7 +5,7 @@ import RankingTable from 'components/RankingTable'
 import RankingSearch from 'components/RankingSearch'
 import TournamentTable from 'components/TournamentTable'
 
-function template({ ranking, rankingState, tournaments, tournamentsState, search, placement, handleSearch, handlePlacement }) {
+function template({ classes, ranking, rankingState, tournaments, tournamentsState, search, placement, handleSearch, handlePlacement }) {
   return (
     <div className="ranking">
       <Grid container spacing={3}>
@@ -18,8 +18,13 @@ function template({ ranking, rankingState, tournaments, tournamentsState, search
           </Card>
         </Grid>
         <Grid item md={4}>
-          <RankingSearch search={search} placement={placement} handleSearch={handleSearch} handlePlacement={handlePlacement}/>
-          <TournamentTable tournaments={tournaments} state={tournamentsState}/>
+          <RankingSearch search={search} placement={placement} handleSearch={handleSearch} handlePlacement={handlePlacement} />
+          <Card className={classes.tournamentBox}>
+            <CardHeader title='Tournois' />
+            <CardContent>
+              <TournamentTable tournaments={tournaments} state={tournamentsState} />
+            </CardContent>
+          </Card>
         </Grid>
       </Grid>
     </div>

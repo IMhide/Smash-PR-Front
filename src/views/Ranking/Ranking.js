@@ -1,9 +1,20 @@
 import { useEffect, useState } from "react"
+import { makeStyles } from '@material-ui/core'
 import template from "./Ranking.jsx";
 import getCircuitRanking from 'lib/getCircuitRanking.js'
 import getCircuitTournaments from 'lib/getCircuitTournaments.js'
 
+const useStyle = makeStyles((theme) => (
+  {
+    tournamentBox:
+    {
+      marginTop: theme.spacing(3),
+    }
+  }
+))
+
 const Ranking = () => {
+  const classes = useStyle()
   const [rankingState, setRankingState] = useState('initial')
   const [ranking, setRanking] = useState([])
   const [cachedRanking, setCachedRanking] = useState([])
@@ -55,7 +66,7 @@ const Ranking = () => {
   const handlePlacement = () => {
     setPlacement(!placement)
   }
-  return template({ ranking, rankingState, tournaments, tournamentsState, search, placement, handlePlacement, handleSearch });
+  return template({ classes, ranking, rankingState, tournaments, tournamentsState, search, placement, handlePlacement, handleSearch });
 }
 
 export default Ranking;
