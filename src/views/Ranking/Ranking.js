@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core'
 import template from "./Ranking.jsx";
 import getCircuitRanking from 'lib/getCircuitRanking.js'
 import getCircuitTournaments from 'lib/getCircuitTournaments.js'
+import { useParams } from "react-router-dom";
 
 const useStyle = makeStyles((theme) => (
   {
@@ -14,6 +15,8 @@ const useStyle = makeStyles((theme) => (
 ))
 
 const Ranking = () => {
+  const { id } = useParams() 
+  const [rankingId, setRankingId] = useState(id || 1)  
   const classes = useStyle()
   const [rankingState, setRankingState] = useState('initial')
   const [ranking, setRanking] = useState([])
@@ -23,10 +26,15 @@ const Ranking = () => {
   const [search, setSearch] = useState('')
   const [placement, setPlacement] = useState(false)
 
+
+  useEffect(()=> {
+    setRankingId(id)    
+  })
+
   useEffect(() => {
     setRankingState('pending')
 
-    getCircuitRanking(1, placement).then((response) => {
+    getCircuitRanking(rankingId, placement).then((response) => {
       setCachedRanking(response.data.data)
       setRanking(response.data.data)
       setSearch('')
@@ -36,12 +44,12 @@ const Ranking = () => {
       console.log('Something Went Wrong')
       console.log(error)
     })
-  }, [placement])
+  }, [placement, rankingId])
 
   useEffect(() => {
     setTournamentsState('pending')
 
-    getCircuitTournaments(1).then((response) => {
+    getCircuitTournaments(rankingId).then((response) => {
       setTournamentsState('success')
       setTournaments(response.data.data)
     }).catch((error) => {
@@ -49,7 +57,7 @@ const Ranking = () => {
       console.log('Something Went Wrong')
       console.log(error)
     })
-  }, [])
+  }, [rankingId])
 
   const handleSearch = (e) => {
     const tmp = e.target.value

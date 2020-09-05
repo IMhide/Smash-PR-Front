@@ -6,13 +6,11 @@ import NotFound from 'views/NotFound'
 
 const Router = () => {
   return (
-    <BrowserRouter>
-      <Switch>
-        <Route exact path='/' component={Ranking} />
-        <Route exact path='/rankings/:id' component={Ranking} />
-        <Route component={NotFound} />
-      </Switch>
-    </BrowserRouter>
+    <Switch>
+      <Route exact path='/' component={Ranking} key='home'/>
+      <Route exact path='/rankings/:id' component={Ranking} key='ranking-view' />
+      <Route component={NotFound} />
+    </Switch>
   )
 }
 

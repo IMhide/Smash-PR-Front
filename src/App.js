@@ -3,6 +3,7 @@ import React from 'react';
 import DesktopLayout from './layouts/DesktopLayout'
 import Router from './Router'
 import { makeStyles } from '@material-ui/core';
+import { BrowserRouter } from 'react-router-dom'
 
 const useStyle = makeStyles((theme) => ({
   root: {
@@ -14,9 +15,11 @@ const App = () => {
 
   return (
     <div className={classes.root}>
-      <DesktopLayout>
-        <Router />
-      </DesktopLayout>
+      <BrowserRouter>
+        <DesktopLayout>
+          <Router />
+        </DesktopLayout>
+      </BrowserRouter>
     </div>
   );
 }
