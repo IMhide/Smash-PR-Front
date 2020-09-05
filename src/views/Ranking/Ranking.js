@@ -29,11 +29,9 @@ const Ranking = () => {
   const [search, setSearch] = useState('')
   const [placement, setPlacement] = useState(false)
 
-
   useEffect(()=> {
     setRankingId(id)    
   })
-
 
   useEffect(() => {
 
@@ -42,7 +40,6 @@ const Ranking = () => {
       const tier = response.data.category
       setRankingName(`Ranking ${name} - ${tier}`)
     })
-
   }, [rankingId])
 
   useEffect(() => {
@@ -88,7 +85,7 @@ const Ranking = () => {
   const handlePlacement = () => {
     setPlacement(!placement)
   }
-  return template({ classes, ranking, rankingState, tournaments, tournamentsState, search, placement, handlePlacement, handleSearch, rankingName });
+  return template({ classes, ranking, rankingState, tournaments, tournamentsState, search, placement, handlePlacement, handleSearch, rankingName, rankingId });
 }
 
 export default Ranking;

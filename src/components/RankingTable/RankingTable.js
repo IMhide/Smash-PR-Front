@@ -2,7 +2,7 @@ import React from "react";
 import template from "./RankingTable.jsx";
 import { CircularProgress, Box } from "@material-ui/core";
 
-const RankingTable = ({ ranking, state }) => {
+const RankingTable = ({ ranking, state, rankingId}) => {
   const [page, setPage] = React.useState(0)
 
   const handleChangePage = (_, newPage) => {
@@ -23,7 +23,7 @@ const RankingTable = ({ ranking, state }) => {
       )
       break
     case 'success':
-      return template({ displayedRanking, page, handleChangePage, total });
+      return template({ displayedRanking, page, handleChangePage, total, rankingId });
       break
     default:
       return ''

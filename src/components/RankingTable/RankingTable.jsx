@@ -1,8 +1,11 @@
 import "./RankingTable.css";
 import React from "react";
 import { TableContainer, Table, TableHead, TableCell, TableBody, TableRow, TableFooter, TablePagination } from "@material-ui/core";
+import { Link, useRouteMatch } from 'react-router-dom'
 
-const template = ({ displayedRanking, page, handleChangePage, total}) => {
+
+const template = ({ displayedRanking, page, handleChangePage, total, rankingId }) => {
+
   return (
     <TableContainer>
       <Table aria-label="simple table">
@@ -17,14 +20,18 @@ const template = ({ displayedRanking, page, handleChangePage, total}) => {
           {displayedRanking.map(player => (
             <TableRow key={player['id']}>
               <TableCell>{player['position']}</TableCell>
-              <TableCell>{player['name']}</TableCell>
+              <TableCell>
+                <Link to={`${rankingId}/players/${player['id']}`}>
+                  {player['name']}
+                </Link>
+              </TableCell>
               <TableCell>{player['score']}</TableCell>
             </TableRow>
           ))}
         </TableBody>
         <TableFooter>
           <TableRow>
-            <TablePagination 
+            <TablePagination
               rowsPerPageOptions={[]}
               count={total}
               rowsPerPage={50}
@@ -34,7 +41,7 @@ const template = ({ displayedRanking, page, handleChangePage, total}) => {
           </TableRow>
         </TableFooter>
       </Table>
-    </TableContainer>
+    </TableContainer >
   );
 };
 
