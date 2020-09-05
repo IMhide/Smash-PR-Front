@@ -3,7 +3,7 @@ import React from "react";
 import { Divider, Drawer, List, ListItem, Tooltip, ListItemText, ListItemIcon } from '@material-ui/core';
 import logo from 'assets/images/logo.png';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 function template({ classes, majors, minors }) {
   return (
@@ -12,12 +12,12 @@ function template({ classes, majors, minors }) {
         <Divider />
         <List>
           {majors.map((major) => (
-            <Link key={major['id']} to={`/rankings/${major['id']}`}>
-              <ListItem key={major['id']} button text={`Major - ${major['name']}`}>
-                <ListItemIcon><ArrowRightIcon /></ListItemIcon>
+            <NavLink key={major['id']} to={`/rankings/${major['id']}`} activeClassName='menu-active' className='item-link'>
+              <ListItem key={major['id']} button text={`Major - ${major['name']}`} className="menu-item">
+                <ListItemIcon className='menuIcon'><ArrowRightIcon /></ListItemIcon>
                 <ListItemText primary={`Major - ${major['name']}`} />
               </ListItem>
-            </Link>
+            </NavLink>
           ))}
         </List>
         <Divider />

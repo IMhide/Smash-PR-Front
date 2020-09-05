@@ -1,3 +1,20 @@
 .pr-logo{
     width: 100%;
 }
+
+.item-link {
+    color: black;
+    text-decoration: none
+}
+
+.menu-active > div.menu-item {
+    background-color: rgba(0, 0, 0, 0.1)
+}
+
+.menu-active > div > .menuIcon {
+    display: block 
+}
+
+div.menuIcon {
+    display: none;
+}

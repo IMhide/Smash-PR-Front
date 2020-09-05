@@ -14,6 +14,9 @@ const useStyles = makeStyles({
   drawerPaper: {
     width: drawerWidth,
     boxShadow: '0 0 2rem 0 rgba(136,152,170,.15)',
+  },
+  menuIcon: {
+    display: 'none'
   }
 });
 
