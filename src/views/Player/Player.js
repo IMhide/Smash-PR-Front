@@ -18,9 +18,13 @@ const Player =  () =>{
   const [tournaments, setTournaments] = useState([])
 
   const [ratings, setRatings] = useState([]) 
+  const [cachedRatings, setCachedRatings] = useState([]) 
   const [ratingState, setRatingState] = useState('initilised') 
 
   const [rankingName, setRankingName] = useState('Ranking')
+
+  const [search, setSearch] = useState('')
+
 
   useEffect(()=>{
     setPlayerState('pending')
@@ -57,6 +61,7 @@ const Player =  () =>{
     getPlayerRatings(rankingId, playerId).then((response) => {
       setRatingState('success')
       setRatings(response.data.data)
+      setCachedRatings(response.data.data)
     }).catch((error) => {
       setRatingState('error')
       console.log('Something went wrong')
@@ -64,7 +69,20 @@ const Player =  () =>{
     })
   }, [])
 
-    return template({ rankingName, playerRanking, playerInfo, totalParticipants, tournaments, tournamentState, ratings, ratingState });
+  const handleSearch = (e) => {
+    const tmp = e.target.value
+    setSearch(tmp)
+    if (tmp.length > 0){
+      const filteredRatings = cachedRatings.filter((player) => (player['opponent'].toLowerCase().includes(tmp.toLowerCase())))     
+      setRatings(filteredRatings)
+    }
+    else{
+      setRatings(cachedRatings)
+    }
+  }
+
+    return template({ rankingName, playerRanking, playerInfo, totalParticipants, 
+      tournaments, tournamentState, ratings, ratingState, search, handleSearch });
 }
 
 export default Player;

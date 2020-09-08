@@ -1,8 +1,16 @@
 import React from "react";
 import template from "./RatingTable.jsx";
 import { Box, CircularProgress } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core";
 
-const RatingTable = ({ ratings, state }) => {
+const useStyle = makeStyles({
+  searchInput: {
+    width: '100%'
+  }
+})
+
+const RatingTable = ({ ratings, state, search, handleSearch }) => {
+  const classes = useStyle()
   const [page, setPage] = React.useState(0)
 
   const handleChangePage = (_, newPage) => {
@@ -23,7 +31,7 @@ const RatingTable = ({ ratings, state }) => {
       )
       break
     case 'success':
-      return template({ displayedRatings, page, total, handleChangePage });
+      return template({ classes, displayedRatings, page, total, handleChangePage, search, handleSearch });
       break
     default:
       return ''
