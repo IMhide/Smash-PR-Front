@@ -1,4 +1,4 @@
-import "./TournamentTable.css";
+import "./PlacementTable.css";
 import React from "react";
 import { TableContainer, Table, TableHead, TableCell, TableBody, TableRow, TableFooter, TablePagination } from "@material-ui/core";
 
@@ -9,16 +9,16 @@ const template = ({ displayedTournaments, page, total, handleChangePage }) => {
         <TableHead>
           <TableRow>
             <TableCell>Tournois</TableCell>
-            <TableCell>Tier</TableCell>
-            <TableCell>Participants</TableCell>
+            <TableCell>Seed</TableCell>
+            <TableCell>Classement</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {displayedTournaments.map(tournament => (
-            <TableRow key={tournament[0]}>
-              <TableCell>{tournament[1]}</TableCell>
-              <TableCell>{tournament[2]}</TableCell>
-              <TableCell>{tournament[3]}</TableCell>
+            <TableRow key={tournament.id}>
+              <TableCell>{tournament.tournament}</TableCell>
+              <TableCell>{tournament.seed}</TableCell>
+              <TableCell>{tournament.placement}</TableCell>
             </TableRow>
           ))}
         </TableBody>

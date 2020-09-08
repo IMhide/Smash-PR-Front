@@ -1,24 +1,26 @@
-import "./TournamentTable.css";
+import "./RatingTable.css";
 import React from "react";
 import { TableContainer, Table, TableHead, TableCell, TableBody, TableRow, TableFooter, TablePagination } from "@material-ui/core";
 
-const template = ({ displayedTournaments, page, total, handleChangePage }) => {
+const template = ({ displayedRatings, page, total, handleChangePage }) => {
   return (
-    <TableContainer >
+    <TableContainer>
       <Table aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>Tournois</TableCell>
-            <TableCell>Tier</TableCell>
-            <TableCell>Participants</TableCell>
+            <TableCell>&nbsp;</TableCell>
+            <TableCell>Joueur</TableCell>
+            <TableCell>Score</TableCell>
+            <TableCell>Points</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {displayedTournaments.map(tournament => (
-            <TableRow key={tournament[0]}>
-              <TableCell>{tournament[1]}</TableCell>
-              <TableCell>{tournament[2]}</TableCell>
-              <TableCell>{tournament[3]}</TableCell>
+          {displayedRatings.map(rating => (
+            <TableRow key={rating.id}>
+              <TableCell>{rating.is_winner ? 'W' : 'L'}</TableCell>
+              <TableCell>{rating.opponent}</TableCell>
+              <TableCell>{rating.winner_score} - {rating.looser_score}</TableCell>
+              <TableCell>{rating.score}</TableCell>
             </TableRow>
           ))}
         </TableBody>
@@ -27,7 +29,7 @@ const template = ({ displayedTournaments, page, total, handleChangePage }) => {
             <TablePagination
               rowsPerPageOptions={[]}
               count={total}
-              rowsPerPage={5}
+              rowsPerPage={10}
               page={page}
               onChangePage={handleChangePage}
             />

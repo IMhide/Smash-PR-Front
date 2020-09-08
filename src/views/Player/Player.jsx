@@ -1,8 +1,10 @@
 import "./Player.css";
 import React from "react";
 import { Grid, Card, CardHeader, CardContent, Typography } from '@material-ui/core'
+import PlacementTable  from 'components/PlacementTable'
+import RatingTable from 'components/RatingTable'
 
-function template({ rankingName, playerRanking, playerInfo, totalParticipants }) {
+function template({ rankingName, playerRanking, playerInfo, totalParticipants, tournaments, tournamentState, ratings, ratingState }) {
   return (
     <div className="player">
       <Grid container spacing={3}>
@@ -40,6 +42,24 @@ function template({ rankingName, playerRanking, playerInfo, totalParticipants })
           <Card>
             <CardHeader title="Sets" />
             <CardContent>{playerInfo.sets.win} - {playerInfo.sets.loss}</CardContent>
+          </Card>
+        </Grid>
+      </Grid>
+      <Grid container spacing={3}>
+        <Grid item md={6}>
+          <Card>
+            <CardHeader title="Historique des matches"></CardHeader>
+            <CardContent>
+              <RatingTable ratings={ratings} state={ratingState} />
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid item md={6}>
+          <Card>
+            <CardHeader title="Historique des tournois"></CardHeader>
+            <CardContent>
+              <PlacementTable tournaments={tournaments} state={tournamentState}/>
+            </CardContent>
           </Card>
         </Grid>
       </Grid>
