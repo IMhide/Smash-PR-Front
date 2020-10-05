@@ -12,7 +12,7 @@ function template({ classes, majors, minors }) {
       <Divider />
       <List>
         {majors.map((major) => (
-          <NavLink key={major['id']} to={`/rankings/${major['id']}`} activeClassName='menu-active' className='item-link'>
+          <NavLink key={major['id']} to={`/circuits/${major['id']}`} activeClassName='menu-active' className='item-link'>
             <ListItem key={major['id']} button text={`Major - ${major['name']}`} className="menu-item">
               <ListItemIcon className='menuIcon'><ArrowRightIcon /></ListItemIcon>
               <ListItemText primary={`Major - ${major['name']}`} />
@@ -23,7 +23,7 @@ function template({ classes, majors, minors }) {
       <Divider />
       <List>
         {minors.map((minor) => (
-          <NavLink key={minor['id']} to={`/rankings/${minor['id']}`} activeClassName='menu-active' className='item-link'>
+          <NavLink key={minor['id']} to={`/circuits/${minor['id']}`} activeClassName='menu-active' className='item-link'>
             <ListItem key={minor['id']} button text={`Minor - ${minor['name']}`} className="menu-item">
               <ListItemIcon className='menuIcon'><ArrowRightIcon /></ListItemIcon>
               <ListItemText primary={`Minor - ${minor['name']}`} />

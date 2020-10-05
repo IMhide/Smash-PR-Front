@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core'
 import template from "./Ranking.jsx";
 import getCircuitRanking from 'lib/getCircuitRanking.js'
 import getCircuitTournaments from 'lib/getCircuitTournaments.js'
+import getMetaInfo from 'lib/getMetaInfo.js'
 import getCircuit from 'lib/getCircuit.js'
 import { useParams } from "react-router-dom";
 
@@ -16,11 +17,11 @@ const useStyle = makeStyles((theme) => (
 ))
 
 const Ranking = () => {
-  const { id } = useParams() 
+  const { id } = useParams()
   const classes = useStyle()
 
-  const [rankingId, setRankingId] = useState(id || 1)  
-  const [rankingName, setRankingName] = useState('ranking')  
+  const [rankingId, setRankingId] = useState(id)
+  const [rankingName, setRankingName] = useState('ranking')
   const [rankingState, setRankingState] = useState('initial')
   const [ranking, setRanking] = useState([])
   const [cachedRanking, setCachedRanking] = useState([])
@@ -28,23 +29,32 @@ const Ranking = () => {
   const [tournaments, setTournaments] = useState([])
   const [search, setSearch] = useState('')
   const [placement, setPlacement] = useState(false)
-
-  useEffect(()=> {
-    setRankingId(id)    
-  })
+  const [metaInfo, setMetaInfo] = useState(false)
 
   useEffect(() => {
+    getMetaInfo().then((response) => {
+      setMetaInfo(response.data)
+      if (rankingId === undefined)
+        setRankingId(response.data['all_time'])
+    }).catch((error) => {
+      console.log('Something Went Wrong')
+      console.log(error)
+    })
+  }, [])
 
+  useEffect(() => {
     getCircuit(rankingId).then((response) => {
       const name = response.data.name
       const tier = response.data.category
       setRankingName(`Ranking ${name} - ${tier}`)
+    }).catch((error) => {
+      console.log('Something Went Wrong')
+      console.log(error)
     })
   }, [rankingId])
 
   useEffect(() => {
     setRankingState('pending')
-
     getCircuitRanking(rankingId, placement).then((response) => {
       setCachedRanking(response.data.data)
       setRanking(response.data.data)
@@ -55,11 +65,10 @@ const Ranking = () => {
       console.log('Something Went Wrong')
       console.log(error)
     })
-  }, [placement, rankingId])
+  }, [rankingId])
 
   useEffect(() => {
     setTournamentsState('pending')
-
     getCircuitTournaments(rankingId).then((response) => {
       setTournamentsState('success')
       setTournaments(response.data.data)
@@ -73,11 +82,11 @@ const Ranking = () => {
   const handleSearch = (e) => {
     const tmp = e.target.value
     setSearch(tmp)
-    if (tmp.length > 0){
-      const filteredRanking = cachedRanking.filter((player) => (player['name'].toLowerCase().includes(tmp.toLowerCase())))     
+    if (tmp.length > 0) {
+      const filteredRanking = cachedRanking.filter((player) => (player['name'].toLowerCase().includes(tmp.toLowerCase())))
       setRanking(filteredRanking)
     }
-    else{
+    else {
       setRanking(cachedRanking)
     }
   }
@@ -85,6 +94,7 @@ const Ranking = () => {
   const handlePlacement = () => {
     setPlacement(!placement)
   }
+
   return template({ classes, ranking, rankingState, tournaments, tournamentsState, search, placement, handlePlacement, handleSearch, rankingName, rankingId });
 }
 

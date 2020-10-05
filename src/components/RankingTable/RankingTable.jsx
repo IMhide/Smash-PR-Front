@@ -21,7 +21,7 @@ const template = ({ displayedRanking, page, handleChangePage, total, rankingId }
             <TableRow key={player['id']}>
               <TableCell>{player['position']}</TableCell>
               <TableCell>
-                <Link to={`${rankingId}/players/${player['id']}`}>
+                <Link to={{ pathname: `/circuits/${rankingId}/players/${player['id']}`} }>
                   {player['name']}
                 </Link>
               </TableCell>

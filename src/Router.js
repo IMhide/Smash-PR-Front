@@ -9,8 +9,8 @@ const Router = () => {
   return (
     <Switch>
       <Route exact path='/' component={Ranking} key='home' />
-      <Route exact path='/rankings/:id' component={Ranking} key='ranking-view' />
-      <Route exact path='/rankings/:rankingId/players/:playerId' component={Player} key='ranking-view' />
+      <Route exact path='/circuits/:id' component={Ranking} key='ranking-view' />
+      <Route exact path='/circuits/:rankingId/players/:playerId' component={Player} key='ranking-view' />
       <Route component={NotFound} />
     </Switch >
   )
