@@ -1,7 +1,7 @@
 import "./Player.css";
 import React from "react";
 import { Grid, Card, CardHeader, CardContent, Typography } from '@material-ui/core'
-import PlacementTable  from 'components/PlacementTable'
+import PlacementTable from 'components/PlacementTable'
 import RatingTable from 'components/RatingTable'
 
 function template({ rankingName, playerRanking, playerInfo, totalParticipants, tournaments, tournamentState, ratings, ratingState, search, handleSearch }) {
@@ -23,25 +23,43 @@ function template({ rankingName, playerRanking, playerInfo, totalParticipants, t
         <Grid item md={3}>
           <Card>
             <CardHeader title="Classement" />
-            <CardContent>{playerRanking.position}/{totalParticipants}</CardContent>
+            <CardContent>
+              <Typography align="center">
+                <span className='big_info'>{playerRanking.position}</span>/{totalParticipants}
+              </Typography>
+            </CardContent>
           </Card>
         </Grid>
         <Grid item md={3}>
           <Card>
             <CardHeader title="Score" />
-            <CardContent>{playerRanking.score} pts</CardContent>
+            <Typography align="center">
+              <CardContent><span className="big_info">{playerRanking.score}</span> pts</CardContent>
+            </Typography>
           </Card>
         </Grid>
         <Grid item md={3}>
           <Card>
             <CardHeader title="Matches" />
-            <CardContent>{playerInfo.matches.win} - {playerInfo.matches.loss}</CardContent>
+            <Typography align="center">
+              <CardContent>
+                <span className="big_info green">{playerInfo.matches.win}</span>
+                <span className="big_info "> - </span>
+                <span className="big_info red">{playerInfo.matches.loss}</span>
+              </CardContent>
+            </Typography>
           </Card>
         </Grid>
         <Grid item md={3}>
           <Card>
             <CardHeader title="Sets" />
-            <CardContent>{playerInfo.sets.win} - {playerInfo.sets.loss}</CardContent>
+            <Typography align="center">
+              <CardContent>
+                <span className="big_info green">{playerInfo.sets.win}</span>
+                <span className="big_info" > - </span>
+                <span className="big_info red">{playerInfo.sets.loss}</span>
+              </CardContent>
+            </Typography>
           </Card>
         </Grid>
       </Grid>
@@ -58,12 +76,12 @@ function template({ rankingName, playerRanking, playerInfo, totalParticipants, t
           <Card>
             <CardHeader title="Historique des tournois"></CardHeader>
             <CardContent>
-              <PlacementTable tournaments={tournaments} state={tournamentState}/>
+              <PlacementTable tournaments={tournaments} state={tournamentState} />
             </CardContent>
           </Card>
         </Grid>
       </Grid>
-    </div>
+    </div >
   );
 };
 

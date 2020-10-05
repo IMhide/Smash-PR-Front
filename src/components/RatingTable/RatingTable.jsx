@@ -19,7 +19,7 @@ const template = ({ displayedRatings, page, total, handleChangePage, search, han
           <TableBody>
             {displayedRatings.map(rating => (
               <TableRow key={rating.id}>
-                <TableCell>{rating.is_winner ? 'W' : 'L'}</TableCell>
+                <TableCell>{rating.is_winner ? <span className="green">W</span> : <span className="red">L</span>}</TableCell>
                 <TableCell>{rating.opponent}</TableCell>
                 <TableCell>{rating.winner_score} - {rating.looser_score}</TableCell>
                 <TableCell>{rating.score}</TableCell>
