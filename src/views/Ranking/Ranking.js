@@ -20,7 +20,7 @@ const Ranking = () => {
   const { id } = useParams()
   const classes = useStyle()
 
-  const [rankingId, setRankingId] = useState(id)
+  const [rankingId, setRankingId] = useState()
   const [rankingName, setRankingName] = useState('ranking')
   const [rankingState, setRankingState] = useState('initial')
   const [ranking, setRanking] = useState([])
@@ -32,10 +32,15 @@ const Ranking = () => {
   const [metaInfo, setMetaInfo] = useState(false)
 
   useEffect(() => {
+    if (id === undefined)
+      setRankingId(metaInfo['current'])
+    else
+      setRankingId(id)
+  });
+
+  useEffect(() => {
     getMetaInfo().then((response) => {
       setMetaInfo(response.data)
-      if (rankingId === undefined)
-        setRankingId(response.data['all_time'])
     }).catch((error) => {
       console.log('Something Went Wrong')
       console.log(error)
@@ -65,7 +70,7 @@ const Ranking = () => {
       console.log('Something Went Wrong')
       console.log(error)
     })
-  }, [rankingId])
+  }, [rankingId, placement])
 
   useEffect(() => {
     setTournamentsState('pending')
