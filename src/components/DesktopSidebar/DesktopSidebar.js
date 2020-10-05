@@ -3,6 +3,7 @@ import template from "./DesktopSidebar.jsx";
 import { makeStyles } from '@material-ui/core/styles';
 import getMinorCircuits from 'lib/getMinorCircuits'
 import getMajorCircuits from 'lib/getMajorCircuits'
+import getMetaInfo from 'lib/getMetaInfo'
 
 const drawerWidth = 300 
 
@@ -24,10 +25,25 @@ const DesktopSidebar = (props) => {
   const classes = useStyles();
   const [majors, setMajors] = useState([])
   const [minors, setMinors] = useState([])
+  const [metaInfo, setMetaInfo] = useState({all_time: undefined, current: undefined})
+
+  useEffect(() => {
+    getMetaInfo().then((response) => {
+      setMetaInfo(response.data)
+    }).catch((error) => {
+      console.log('Something Went Wrong')
+      console.log(error)
+    })
+  }, [])
 
   useEffect(() => {
     getMajorCircuits().then((response) => {
-      setMajors(response.data)
+      const ignoreIds = [parseInt(metaInfo['all_time']), parseInt(metaInfo['current'])]
+      console.log(ignoreIds)
+      const majors = response.data.filter((major) => !ignoreIds.includes(major.id))
+
+      setMajors(majors)
+
     }).catch((error) => {
       console.log('Something went wrong')
       console.log(error)
@@ -39,9 +55,9 @@ const DesktopSidebar = (props) => {
       console.log('Something went wrong')
       console.log(error)
     })
-  },[])
+  },[metaInfo])
 
-  return template({classes, majors, minors});
+  return template({classes, majors, minors, metaInfo});
 }
 
 export default DesktopSidebar;
