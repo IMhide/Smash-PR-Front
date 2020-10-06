@@ -54,9 +54,6 @@ const StylesMedium = makeStyles((theme) => ({
   },
 }));
 
-
-
-
 const DesktopSidebar = (props) => {
   let classes;
   const [majors, setMajors] = useState([])
@@ -66,7 +63,6 @@ const DesktopSidebar = (props) => {
 
   const largeScreen = useMediaQuery('(min-width:1400px)');
   const drawerOpen = !largeScreen && menuClicked 
-
   if (largeScreen) {
     classes = StylesBig();
   } else {
