@@ -5,7 +5,6 @@ import logo from 'assets/images/logo.png';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import appbarLogo from 'assets/images/logo_appbar.png'
-
 import MenuIcon from '@material-ui/icons/Menu';
 import { NavLink } from "react-router-dom";
 

@@ -8,7 +8,7 @@ function template({ rankingName, playerRanking, playerInfo, totalParticipants, t
   return (
     <div className="player">
       <Grid container spacing={3}>
-        <Grid item md={12}>
+        <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
           <Card>
             <CardHeader title={`Classement dans le ${rankingName}`} />
             <CardContent>
@@ -20,7 +20,7 @@ function template({ rankingName, playerRanking, playerInfo, totalParticipants, t
         </Grid>
       </Grid>
       <Grid container spacing={3}>
-        <Grid item md={3}>
+        <Grid item xs={6} sm={6} md={3} lg={3} xl={3}>
           <Card>
             <CardHeader title="Classement" />
             <CardContent>
@@ -30,7 +30,7 @@ function template({ rankingName, playerRanking, playerInfo, totalParticipants, t
             </CardContent>
           </Card>
         </Grid>
-        <Grid item md={3}>
+        <Grid item xs={6} sm={6} md={3} lg={3} xl={3}>
           <Card>
             <CardHeader title="Score" />
             <Typography align="center">
@@ -38,7 +38,7 @@ function template({ rankingName, playerRanking, playerInfo, totalParticipants, t
             </Typography>
           </Card>
         </Grid>
-        <Grid item md={3}>
+        <Grid item xs={6} sm={6} md={3} lg={3} xl={3}>
           <Card>
             <CardHeader title="Matches" />
             <Typography align="center">
@@ -50,7 +50,7 @@ function template({ rankingName, playerRanking, playerInfo, totalParticipants, t
             </Typography>
           </Card>
         </Grid>
-        <Grid item md={3}>
+        <Grid item xs={6} sm={6} md={3} lg={3} xl={3}>
           <Card>
             <CardHeader title="Sets" />
             <Typography align="center">
@@ -64,7 +64,7 @@ function template({ rankingName, playerRanking, playerInfo, totalParticipants, t
         </Grid>
       </Grid>
       <Grid container spacing={3}>
-        <Grid item md={6}>
+        <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
           <Card>
             <CardHeader title="Historique des matches"></CardHeader>
             <CardContent>
@@ -72,7 +72,7 @@ function template({ rankingName, playerRanking, playerInfo, totalParticipants, t
             </CardContent>
           </Card>
         </Grid>
-        <Grid item md={6}>
+        <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
           <Card>
             <CardHeader title="Historique des tournois"></CardHeader>
             <CardContent>

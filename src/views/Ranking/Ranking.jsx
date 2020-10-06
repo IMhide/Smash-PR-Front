@@ -9,7 +9,7 @@ function template({ classes, ranking, rankingState, tournaments, tournamentsStat
   return (
     <div className="ranking">
       <Grid container spacing={3}>
-        <Grid item md={7}>
+        <Grid item  xs={12} sm={12} md={7} lg={8} xl={8}>
           <Card>
             <CardHeader title={rankingName} />
             <CardContent>
@@ -17,7 +17,7 @@ function template({ classes, ranking, rankingState, tournaments, tournamentsStat
             </CardContent>
           </Card>
         </Grid>
-        <Grid item md={5}>
+        <Grid item xs={12} sm={12} md={5} lg={4} xl={4}>
           <RankingSearch search={search} placement={placement} handleSearch={handleSearch} handlePlacement={handlePlacement} />
           <Card className={classes.tournamentBox}>
             <CardHeader title='Tournois' />

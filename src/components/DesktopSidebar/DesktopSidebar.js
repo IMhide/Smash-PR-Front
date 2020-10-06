@@ -52,6 +52,12 @@ const StylesMedium = makeStyles((theme) => ({
   bgb: {
     background: '#000',
   },
+  appBar: {
+    transition: theme.transitions.create(['margin', 'width'], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+  },
 }));
 
 const DesktopSidebar = (props) => {
@@ -62,7 +68,8 @@ const DesktopSidebar = (props) => {
   const [menuClicked, setMenuClicked] = useState(false)
 
   const largeScreen = useMediaQuery('(min-width:1400px)');
-  const drawerOpen = !largeScreen && menuClicked 
+  const drawerOpen = largeScreen || (!largeScreen && menuClicked)
+
   if (largeScreen) {
     classes = StylesBig();
   } else {
