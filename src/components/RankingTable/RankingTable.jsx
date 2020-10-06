@@ -1,7 +1,8 @@
 import "./RankingTable.css";
 import React from "react";
-import { TableContainer, Table, TableHead, TableCell, TableBody, TableRow, TableFooter, TablePagination } from "@material-ui/core";
+import { TableContainer, Table, TableHead, TableCell, TableBody, TableRow, TableFooter, TablePagination, Tooltip } from "@material-ui/core";
 import { Link, useRouteMatch } from 'react-router-dom'
+import placement from 'assets/images/placement.png'
 
 
 const template = ({ displayedRanking, page, handleChangePage, total, rankingId }) => {
@@ -18,12 +19,19 @@ const template = ({ displayedRanking, page, handleChangePage, total, rankingId }
         </TableHead>
         <TableBody>
           {displayedRanking.map(player => (
-            <TableRow key={player['id']}>
+            <TableRow key={player['id']} className={player['match_count'] < 12 ? 'placement-row' : ''}>
               <TableCell>{player['position']}</TableCell>
               <TableCell>
-                <Link to={{ pathname: `/circuits/${rankingId}/players/${player['id']}`} }>
+                <Link to={{ pathname: `/circuits/${rankingId}/players/${player['id']}` }}>
                   {player['name']}
                 </Link>
+                {player['match_count'] < 12 ?
+                  <Tooltip title="Classement temporaire" placement='left' arrow>
+                    <img src={placement} className='placement-logo' alt='placement-logo' />
+                  </Tooltip>
+                  :
+                  ''}
+
               </TableCell>
               <TableCell>{player['score']}</TableCell>
             </TableRow>
