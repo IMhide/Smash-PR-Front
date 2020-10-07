@@ -43,7 +43,7 @@ function template({ classes, majors, minors, metaInfo, drawerOpen, clsx, handleM
             <NavLink key={major['id']} to={`/circuits/${major['id']}`} activeClassName='menu-active' className='item-link'>
               <ListItem key={major['id']} button text={`Major - ${major['name']}`} className="menu-item">
                 <ListItemIcon className='menuIcon'><ArrowRightIcon /></ListItemIcon>
-                <ListItemText primary={`Major - ${major['name']}`} />
+                <ListItemText primary={`Nat. - ${major['name']}`} />
               </ListItem>
             </NavLink>
           ))}
@@ -54,7 +54,7 @@ function template({ classes, majors, minors, metaInfo, drawerOpen, clsx, handleM
             <NavLink key={minor['id']} to={`/circuits/${minor['id']}`} activeClassName='menu-active' className='item-link'>
               <ListItem key={minor['id']} button text={`Minor - ${minor['name']}`} className="menu-item">
                 <ListItemIcon className='menuIcon'><ArrowRightIcon /></ListItemIcon>
-                <ListItemText primary={`Minor - ${minor['name']}`} />
+                <ListItemText primary={`Reg. - ${minor['name']}`} />
               </ListItem>
             </NavLink>
           ))}
