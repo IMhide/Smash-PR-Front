@@ -31,7 +31,7 @@ const Ranking = () => {
   const [placement, setPlacement] = useState(false)
   const [metaInfo, setMetaInfo] = useState(false)
 
-  useEffect(() => {
+  useEffect(() => {  // eslint-disable-line
     if (id === undefined)
       setRankingId(metaInfo['current'])
     else

@@ -10,7 +10,6 @@ const Player =  () =>{
   const { playerId, rankingId } = useParams()
 
   const [playerRanking, setPlayerRanking] = useState({})
-  const [playerState, setPlayerState] = useState('initialised')
   const [playerInfo, setPlayerInfo] = useState({matches: {}, sets: {}}) 
   const [totalParticipants, setTotalParticipants] = useState(0)
 
@@ -27,19 +26,16 @@ const Player =  () =>{
 
 
   useEffect(()=>{
-    setPlayerState('pending')
     getCircuitPlayer(rankingId, playerId).then((response) => {
-      setPlayerState('success')
       setRankingName(response.data.circuit.name)
       setPlayerRanking(response.data.ranking)
       setTotalParticipants(response.data.circuit_total_participants)
       setPlayerInfo({sets: response.data.sets, matches: response.data.matches })
     }).catch((error) => {
-      setPlayerState('error')
       console.log('Something went Wrong')
       console.log(error)
     })
-  }, [])
+  }, []) // eslint-disable-line
 
   useEffect(() => {
     setTournamentState('pending')
@@ -53,7 +49,7 @@ const Player =  () =>{
       console.log(error)
     })
 
-  },[] )
+  }, []) // eslint-disable-line  
   
   useEffect(() => {
     setRatingState('pending')
@@ -67,7 +63,7 @@ const Player =  () =>{
       console.log('Something went wrong')
       console.log(error)
     })
-  }, [])
+  }, []) // eslint-disable-line
 
   const handleSearch = (e) => {
     const tmp = e.target.value
