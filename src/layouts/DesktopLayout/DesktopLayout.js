@@ -1,4 +1,3 @@
-import React from "react";
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import template from "./DesktopLayout.jsx";
 import { makeStyles } from "@material-ui/core";

@@ -29,10 +29,8 @@ const RatingTable = ({ ratings, state, search, handleSearch }) => {
           <CircularProgress />
         </Box>
       )
-      break
     case 'success':
       return template({ classes, displayedRatings, page, total, handleChangePage, search, handleSearch });
-      break
     default:
       return ''
   }

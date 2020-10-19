@@ -1,7 +1,7 @@
 import "./RankingTable.css";
 import React from "react";
 import { TableContainer, Table, TableHead, TableCell, TableBody, TableRow, TableFooter, TablePagination, Tooltip } from "@material-ui/core";
-import { Link, useRouteMatch } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import placement from 'assets/images/placement.png'
 
 

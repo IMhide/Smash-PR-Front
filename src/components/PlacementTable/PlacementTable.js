@@ -21,10 +21,8 @@ const PlacementTable = ({ tournaments, state }) => {
           <CircularProgress />
         </Box>
       )
-      break
     case 'success':
       return template({ displayedTournaments, page, total, handleChangePage });
-      break
     default:
       return <React.Fragment></React.Fragment>
   }

@@ -21,10 +21,8 @@ const RankingTable = ({ ranking, state, rankingId}) => {
         <CircularProgress />
       </Box>
       )
-      break
     case 'success':
       return template({ displayedRanking, page, handleChangePage, total, rankingId });
-      break
     default:
       return ''
   }

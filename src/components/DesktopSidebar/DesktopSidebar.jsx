@@ -1,6 +1,6 @@
 import "./DesktopSidebar.css";
 import React from "react";
-import { Divider, Drawer, List, ListItem, ListItemText, ListItemIcon, Toolbar, Typography, IconButton, AppBar } from '@material-ui/core';
+import { Divider, Drawer, List, ListItem, ListItemText, ListItemIcon, Toolbar, IconButton, AppBar } from '@material-ui/core';
 import logo from 'assets/images/logo.png';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
