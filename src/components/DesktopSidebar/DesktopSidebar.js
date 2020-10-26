@@ -26,7 +26,6 @@ const DesktopSidebar = (props) => {
   
   const circuits = useSelector(selectCircuit);
   const dispatch = useDispatch();
-  console.log(circuits)
 
 
   useEffect(() => {
