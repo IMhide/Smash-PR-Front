@@ -21,7 +21,7 @@ const Ranking = () => {
   const classes = useStyle()
 
   const [rankingId, setRankingId] = useState()
-  const [rankingName, setRankingName] = useState('ranking')
+  const [rankingName, setRankingName] = useState('Classement en cours de chargement')
   const [rankingState, setRankingState] = useState('initial')
   const [ranking, setRanking] = useState([])
   const [cachedRanking, setCachedRanking] = useState([])
