@@ -6,7 +6,6 @@ import { makeStyles } from '@material-ui/core';
 import { BrowserRouter } from 'react-router-dom'
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 
-
 const theme = createMuiTheme({
   breakpoints: {
     values: {

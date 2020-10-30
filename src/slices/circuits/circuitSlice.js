@@ -38,5 +38,5 @@ export const updateCircuitsAsync = () => (dispatch) => {
   })
 }
 
-export const selectCircuit = (state) => state.circuits.value
+export const selectCircuit = (state) => (state.circuits.value)
 export default circuitsSlice.reducer

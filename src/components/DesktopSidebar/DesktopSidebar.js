@@ -27,7 +27,7 @@ const DesktopSidebar = (props) => {
   const circuits = useSelector(selectCircuit);
   const dispatch = useDispatch();
 
-
+/*
   useEffect(() => {
     getMetaInfo().then((response) => {
       setMetaInfo(response.data)
@@ -35,11 +35,11 @@ const DesktopSidebar = (props) => {
       console.log('Something Went Wrong')
       console.log(error)
     })
-  }, [])
-
+  }, []) 
+*/
   useEffect(() => {
     dispatch(updateCircuitsAsync())
-  }, [])
+  }, [dispatch])
 
   const handleMenu = () => {
     setMenuClicked(!menuClicked)
