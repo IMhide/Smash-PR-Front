@@ -8,14 +8,14 @@ import appbarLogo from 'assets/images/logo_appbar.png'
 import MenuIcon from '@material-ui/icons/Menu';
 import { NavLink } from "react-router-dom";
 
-function template({ classes, majors, minors, metaInfo, drawerOpen, clsx, handleMenu }) {
+function template({ classes, majors, minors, metaDatas, drawerOpen, clsx, handleMenu }) {
   return (
     <React.Fragment>
       <AppBar position="fixed" className={clsx(classes.appBar, classes.bgb, { [classes.appBarShift]: drawerOpen })}>
         <Toolbar>
           <IconButton color="inherit" aria-label="open drawer" onClick={handleMenu} edge="start" className={clsx(classes.menuButton)} >
-            <ArrowBackIosIcon className={{ [classes.hide]: !drawerOpen }} />
-            <MenuIcon className={{ [classes.hide]: drawerOpen }} />
+            <ArrowBackIosIcon className={clsx({ [classes.hide]: !drawerOpen })} />
+            <MenuIcon className={clsx({ [classes.hide]: drawerOpen })} />
           </IconButton>
           <img src={appbarLogo} className="pr-logo-appbar" alt="Logo PR France" />
         </Toolbar>
@@ -24,14 +24,14 @@ function template({ classes, majors, minors, metaInfo, drawerOpen, clsx, handleM
         <img src={logo} className="pr-logo" alt="Logo PR France" />
         <Divider />
         <List>
-          <NavLink key={metaInfo['current']} to={`/`} activeClassName='menu-active' className='item-link' exact>
-            <ListItem key={metaInfo['current']} button text="Ranking saison en cours" className="menu-item">
+          <NavLink key={metaDatas.currentId} to={`/`} activeClassName='menu-active' className='item-link' exact>
+            <ListItem key={metaDatas.currentId} button text="Ranking saison en cours" className="menu-item">
               <ListItemIcon className='menuIcon'><ArrowRightIcon /></ListItemIcon>
               <ListItemText primary="Ranking saison en cours" />
             </ListItem>
           </NavLink>
-          <NavLink key={metaInfo['all_time']} to={`/circuits/${metaInfo['all_time']}`} activeClassName='menu-active' className='item-link'>
-            <ListItem key={metaInfo['all_time']} button text="Ranking All Time" className="menu-item">
+          <NavLink key={metaDatas.allTimeId} to={`/circuits/${metaDatas.allTimeId}`} activeClassName='menu-active' className='item-link'>
+            <ListItem key={metaDatas.allTimeId} button text="Ranking All Time" className="menu-item">
               <ListItemIcon className='menuIcon'><ArrowRightIcon /></ListItemIcon>
               <ListItemText primary="Ranking All Time" />
             </ListItem>
