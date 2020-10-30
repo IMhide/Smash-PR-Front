@@ -35,8 +35,8 @@ const DesktopSidebar = (props) => {
   const circuits = useSelector(selectCircuit);
   const metaDatas = useSelector(selectMetaDatas);
   const ignoreIds = [metaDatas.allTimeId, metaDatas.currentId]
-  const majors = circuits.tournaments.majors.filter((major) => !ignoreIds.includes(major.id))
-  const minors = circuits.tournaments.minors
+  const majors = circuits.majors.filter((major) => !ignoreIds.includes(major.id))
+  const minors = circuits.minors
 
   return template({ classes, majors, minors, metaDatas, drawerOpen, clsx, handleMenu });
 }

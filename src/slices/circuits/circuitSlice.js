@@ -7,20 +7,16 @@ import getMajorCircuits from 'lib/getMajorCircuits'
 export const circuitsSlice = createSlice({
   name: 'circuits',
   initialState: {
-    value:  {
-        tournaments: {
-            majors: [],
-            minors: []
-        }
-    },
+    majors: [],
+    minors: []
   },
   reducers: {
-      updateMajors: updateMajorsAction,
-      updateMinors: updateMinorsAction
+    updateMajors: updateMajorsAction,
+    updateMinors: updateMinorsAction
   }
 });
 
-export const {updateMajors, updateMinors} = circuitsSlice.actions;
+export const { updateMajors, updateMinors } = circuitsSlice.actions;
 
 export const updateCircuitsAsync = () => (dispatch) => {
   getMajorCircuits().then((response) => {
@@ -38,5 +34,5 @@ export const updateCircuitsAsync = () => (dispatch) => {
   })
 }
 
-export const selectCircuit = (state) => (state.circuits.value)
+export const selectCircuit = (state) => (state.circuits)
 export default circuitsSlice.reducer

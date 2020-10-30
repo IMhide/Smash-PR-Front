@@ -1,4 +1,3 @@
-
 import { createSlice } from '@reduxjs/toolkit';
 import updateAllTimeIdAction from './updateAllTimeIdAction'
 import updateCurrentIdAction from './updateCurrentIdAction'
