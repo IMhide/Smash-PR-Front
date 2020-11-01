@@ -2,7 +2,6 @@ import React from "react";
 import template from "./PlacementTable.jsx";
 import { Box, CircularProgress } from "@material-ui/core";
 
-
 const tournamentsPerPage = 5
 
 const PlacementTable = ({ tournaments, state }) => {
