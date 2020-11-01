@@ -14,7 +14,7 @@ const RankingTable = ({ ranking, state, rankingId}) => {
   const total = ranking.length
   const start_at = page * matchPerPage 
   const stop_at = (page + 1) * matchPerPage 
-  const displayedRanking =  ranking.slice(start_at, stop_at )
+  const displayedRanking =  ranking.slice(start_at, stop_at)
 
   switch (state) {
     case 'pending':
