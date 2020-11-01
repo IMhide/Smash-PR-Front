@@ -1,13 +1,7 @@
 import React from "react";
 import template from "./RatingTable.jsx";
 import { Box, CircularProgress } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core";
-
-const useStyle = makeStyles({
-  searchInput: {
-    width: '100%'
-  }
-})
+import useStyle from './RatingTable.style'
 
 const RatingTable = ({ ratings, state, search, handleSearch }) => {
   const classes = useStyle()
