@@ -3,6 +3,8 @@ import template from "./RatingTable.jsx";
 import { Box, CircularProgress } from "@material-ui/core";
 import useStyle from './RatingTable.style'
 
+const ratingsPerPage = 10
+
 const RatingTable = ({ ratings, state, search, handleSearch }) => {
   const classes = useStyle()
   const [page, setPage] = React.useState(0)
@@ -12,8 +14,8 @@ const RatingTable = ({ ratings, state, search, handleSearch }) => {
   }
 
   const total = ratings.length
-  const start_at = page * 10
-  const stop_at = (page + 1) * 10 
+  const start_at = page * ratingsPerPage 
+  const stop_at = (page + 1) * ratingsPerPage 
   const displayedRatings=  ratings.slice(start_at, stop_at )
 
   switch (state) {
