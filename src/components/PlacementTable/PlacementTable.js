@@ -2,6 +2,9 @@ import React from "react";
 import template from "./PlacementTable.jsx";
 import { Box, CircularProgress } from "@material-ui/core";
 
+
+const tournamentsPerPage = 5
+
 const PlacementTable = ({ tournaments, state }) => {
   const [page, setPage] = React.useState(0)
 
@@ -10,8 +13,8 @@ const PlacementTable = ({ tournaments, state }) => {
   }
 
   const total = tournaments.length
-  const start_at = page * 5
-  const stop_at = (page + 1) * 5 
+  const start_at = page * tournamentsPerPage 
+  const stop_at = (page + 1) * tournamentsPerPage 
   const displayedTournaments =  tournaments.slice(start_at, stop_at )
 
   switch (state) {
