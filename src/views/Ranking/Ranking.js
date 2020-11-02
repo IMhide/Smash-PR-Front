@@ -7,6 +7,8 @@ import getMetaInfo from 'lib/getMetaInfo.js'
 import getCircuit from 'lib/getCircuit.js'
 import { useParams } from "react-router-dom";
 
+
+
 const useStyle = makeStyles((theme) => (
   {
     tournamentBox:
@@ -33,6 +35,7 @@ const Ranking = () => {
 
   useEffect(() => {  // eslint-disable-line
     if (id === undefined)
+
       setRankingId(metaInfo['current'])
     else
       setRankingId(id)
