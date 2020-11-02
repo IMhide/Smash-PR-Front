@@ -1,22 +1,11 @@
 import { useEffect, useState } from "react"
-import { makeStyles } from '@material-ui/core'
 import template from "./Ranking.jsx";
 import getCircuitRanking from 'lib/getCircuitRanking.js'
 import getCircuitTournaments from 'lib/getCircuitTournaments.js'
 import getMetaInfo from 'lib/getMetaInfo.js'
 import getCircuit from 'lib/getCircuit.js'
 import { useParams } from "react-router-dom";
-
-
-
-const useStyle = makeStyles((theme) => (
-  {
-    tournamentBox:
-    {
-      marginTop: theme.spacing(3),
-    }
-  }
-))
+import useStyle from './Ranking.style'
 
 const Ranking = () => {
   const { id } = useParams()
