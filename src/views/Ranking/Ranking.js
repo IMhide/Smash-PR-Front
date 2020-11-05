@@ -1,26 +1,22 @@
-import { useEffect, useState } from "react"
-import template from "./Ranking.jsx";
-import { useParams } from "react-router-dom";
-
-import useStyle from './Ranking.style'
-import { selectMetaDatas } from 'slices/metaDatas/metaDatasSlice'
+import { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
+import { selectMetaDatas } from 'slices/metaDatas/metaDatasSlice'
+import { updateSearch, togglePlacement, selectSearch } from 'slices/search/searchSlice'
 import {
   updateId, selectCurrentCircuit, updateCurrentCircuitAsync,
   updateTournamentsAsync, updateRankingAsync
 } from 'slices/currentCircuit/currentCirtcuitSlice'
+import template from "./Ranking.jsx";
+import useStyle from './Ranking.style'
 
 const Ranking = () => {
   const { id } = useParams()
   const classes = useStyle()
 
-  const [ranking, setRanking] = useState([])
-  const [cachedRanking, setCachedRanking] = useState([])
-  const [search, setSearch] = useState('')
-  const [placement, setPlacement] = useState(false)
-
   const metaDatas = useSelector(selectMetaDatas);
   const currentCircuit = useSelector(selectCurrentCircuit)
+  const search = useSelector(selectSearch)
   const dispatch = useDispatch();
 
   useEffect(() => {  // eslint-disable-line
@@ -37,26 +33,24 @@ const Ranking = () => {
       return
     dispatch(updateCurrentCircuitAsync(currentCircuit.id))
     dispatch(updateTournamentsAsync(currentCircuit.id))
-    dispatch(updateRankingAsync(currentCircuit.id, placement))
-  }, [currentCircuit.id])
+  }, [currentCircuit.id, dispatch])
+
+  useEffect(() => {
+    dispatch(updateRankingAsync(currentCircuit.id, search.placement))
+  }, [currentCircuit.id, search.placement, dispatch])
 
   const handleSearch = (e) => {
-    const tmp = e.target.value
-    setSearch(tmp)
-    if (tmp.length > 0) {
-      const filteredRanking = cachedRanking.filter((player) => (player['name'].toLowerCase().includes(tmp.toLowerCase())))
-      setRanking(filteredRanking)
-    }
-    else {
-      setRanking(cachedRanking)
-    }
+    dispatch(updateSearch(e.target.value))
   }
 
   const handlePlacement = () => {
-    setPlacement(!placement)
+    dispatch(togglePlacement())
   }
+  let displayedRanking = currentCircuit.ranking.standing
+  if (search.value.length > 0)
+    displayedRanking = currentCircuit.ranking.standing.filter((player) => (player.name.toLowerCase().includes(search.value)))
 
-  return template({ classes, currentCircuit, search, placement, handlePlacement, handleSearch });
+  return template({ classes, currentCircuit, displayedRanking, handlePlacement, handleSearch });
 }
 
 export default Ranking;
