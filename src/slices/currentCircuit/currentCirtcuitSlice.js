@@ -11,12 +11,12 @@ import updateCurrentCircuitAsyncAction from './updateCurrentCircuitAsyncAction'
 import updateTournamentsAsyncAction from './updateTournamentsAsyncAction'
 import updateRankingAsyncAction from './updateRankingAsyncAction'
 
-export const currentCircuitApiCallStates = { 
+export const currentCircuitApiCallStates = {
     INITIALIZED: 0,
     SENT: 1,
     SUCCESS: 2,
     FAILED: 3
- }
+}
 
 export const currentCircuitSlice = createSlice({
     name: 'currentCircuit',
@@ -46,8 +46,10 @@ export const currentCircuitSlice = createSlice({
     }
 });
 
-export const { updateName, updateId, updateCategory, updateApiCallState, 
-    updateRanking, updateRankingApiCallState, updateTournaments, updateTournamentsApiCallState } = currentCircuitSlice.actions;
+export const {
+    updateName, updateId, updateCategory, updateApiCallState, updateRanking,
+    updateRankingApiCallState, updateTournaments, updateTournamentsApiCallState
+} = currentCircuitSlice.actions;
 
 export const updateCurrentCircuitAsync = updateCurrentCircuitAsyncAction;
 export const updateTournamentsAsync = updateTournamentsAsyncAction;
