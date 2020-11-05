@@ -1,11 +1,19 @@
-import "./RatingTable.css";
 import React from "react";
-import { TableContainer, Table, TableHead, TableCell, TableBody, TableRow, TableFooter, TablePagination, TextField } from "@material-ui/core";
 
-const template = ({ displayedRatings, page, total, handleChangePage, search, handleSearch, classes }) => {
+import {
+  TableContainer, Table, TableHead, TableCell, TableBody, TableRow,
+  TableFooter, TablePagination, TextField
+} from "@material-ui/core";
+
+import "./RatingTable.css";
+
+const template = ({
+  displayedRatings, page, total, handleChangePage,
+  search, handleSearch, classes
+}) => {
   return (
-    <React.Fragment>
-        <TextField id="playerName" label="Chercher un opposant" className={classes.searchInput} value={search} onChange={handleSearch} />
+    <>
+      <TextField id="playerName" label="Chercher un opposant" className={classes.searchInput} value={search} onChange={handleSearch} />
       <TableContainer>
         <Table aria-label="simple table">
           <TableHead>
@@ -39,7 +47,7 @@ const template = ({ displayedRatings, page, total, handleChangePage, search, han
           </TableFooter>
         </Table>
       </TableContainer>
-    </React.Fragment>
+    </>
   );
 };
 

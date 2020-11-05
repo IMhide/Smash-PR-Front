@@ -1,10 +1,11 @@
 import React from "react";
 import template from "./RankingTable.jsx";
 import { CircularProgress, Box } from "@material-ui/core";
+import { currentCircuitApiCallStates } from 'slices/currentCircuit/currentCirtcuitSlice'
 
 const matchPerPage = 50
 
-const RankingTable = ({ ranking, state, rankingId}) => {
+const RankingTable = ({ ranking, state, circuitId}) => {
   const [page, setPage] = React.useState(0)
 
   const handleChangePage = (_, newPage) => {
@@ -17,16 +18,16 @@ const RankingTable = ({ ranking, state, rankingId}) => {
   const displayedRanking =  ranking.slice(start_at, stop_at)
 
   switch (state) {
-    case 'pending':
+    case currentCircuitApiCallStates.SENT:
       return (
       <Box display="flex" alignItems="center" justifyContent="center">
         <CircularProgress />
       </Box>
       )
-    case 'success':
-      return template({ displayedRanking, page, handleChangePage, total, rankingId });
+    case currentCircuitApiCallStates.SUCCESS:
+      return template({ displayedRanking, page, handleChangePage, total, circuitId});
     default:
-      return ''
+      return null
   }
 }
 

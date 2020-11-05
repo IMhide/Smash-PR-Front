@@ -1,6 +1,7 @@
 import React from "react";
 import template from "./TournamentTable.jsx";
 import { Box, CircularProgress } from "@material-ui/core";
+import {currentCircuitApiCallStates} from 'slices/currentCircuit/currentCirtcuitSlice'
 
 const tournamentsPerPage = 5
 
@@ -17,13 +18,13 @@ const TournamentTable = ({ tournaments, state }) => {
   const displayedTournaments =  tournaments.slice(start_at, stop_at)
 
   switch (state) {
-    case 'pending':
+    case currentCircuitApiCallStates.SENT:
       return (
         <Box display="flex" alignItems="center" justifyContent="center">
           <CircularProgress />
         </Box>
       )
-    case 'success':
+    case currentCircuitApiCallStates.SUCCESS:
       return template({ displayedTournaments, page, total, handleChangePage });
     default:
       return ''
