@@ -1,8 +1,8 @@
-import currentCircuitApiCallStates from './currentCirtcuitSlice'
+import { currentCircuitApiCallStates } from './currentCirtcuitSlice'
 
 const updateApiCallStateAction = (state, action) => {
-    if (currentCircuitApiCallStates.includes(action.paylaod))
+    if (Object.values(currentCircuitApiCallStates).includes(action.payload))
         state.apiCallState = action.paylaod
-} 
+}
 
 export default updateApiCallStateAction

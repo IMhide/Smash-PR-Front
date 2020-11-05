@@ -2,10 +2,13 @@ import { useEffect, useState } from "react"
 import template from "./Ranking.jsx";
 import getCircuitRanking from 'lib/getCircuitRanking.js'
 import getCircuitTournaments from 'lib/getCircuitTournaments.js'
-import getMetaInfo from 'lib/getMetaInfo.js'
 import getCircuit from 'lib/getCircuit.js'
 import { useParams } from "react-router-dom";
+
 import useStyle from './Ranking.style'
+import { selectMetaDatas } from 'slices/metaDatas/metaDatasSlice'
+import { useSelector, useDispatch } from "react-redux";
+import { updateId, selectCurrentCircuit, updateCurrentCircuitAsync } from 'slices/currentCircuit/currentCirtcuitSlice'
 
 const Ranking = () => {
   const { id } = useParams()
@@ -13,6 +16,7 @@ const Ranking = () => {
 
   const [rankingId, setRankingId] = useState()
   const [rankingName, setRankingName] = useState('Classement en cours de chargement')
+
   const [rankingState, setRankingState] = useState('initial')
   const [ranking, setRanking] = useState([])
   const [cachedRanking, setCachedRanking] = useState([])
@@ -20,35 +24,24 @@ const Ranking = () => {
   const [tournaments, setTournaments] = useState([])
   const [search, setSearch] = useState('')
   const [placement, setPlacement] = useState(false)
-  const [metaInfo, setMetaInfo] = useState(false)
+
+  const metaDatas = useSelector(selectMetaDatas);
+  const currentCircuit = useSelector(selectCurrentCircuit)
+  const dispatch = useDispatch();
+
 
   useEffect(() => {  // eslint-disable-line
-    if (id === undefined)
-
-      setRankingId(metaInfo['current'])
+    if (id === undefined) {
+      if (metaDatas.currentId !== undefined)
+        dispatch(updateId(metaDatas.currentId))
+    }
     else
-      setRankingId(id)
+      dispatch(updateId(id))
   });
 
   useEffect(() => {
-    getMetaInfo().then((response) => {
-      setMetaInfo(response.data)
-    }).catch((error) => {
-      console.log('Something Went Wrong')
-      console.log(error)
-    })
-  }, [])
-
-  useEffect(() => {
-    getCircuit(rankingId).then((response) => {
-      const name = response.data.name
-      const tier = response.data.category
-      setRankingName(`Ranking ${name} - ${tier}`)
-    }).catch((error) => {
-      console.log('Something Went Wrong')
-      console.log(error)
-    })
-  }, [rankingId])
+    dispatch(updateCurrentCircuitAsync(currentCircuit.id))
+  }, [currentCircuit.id])
 
   useEffect(() => {
     setRankingState('pending')
