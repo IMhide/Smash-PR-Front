@@ -27,7 +27,7 @@ function template({ classes, currentCircuit, displayedRanking, handleSearch, han
           </Card>
         </Grid>
       </Grid>
-l   </div>
+   </div>
   );
 };
 
