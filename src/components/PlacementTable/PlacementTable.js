@@ -2,7 +2,6 @@ import React from "react";
 import template from "./PlacementTable.jsx";
 import { Box, CircularProgress } from "@material-ui/core";
 import {currentPlayerApiCallStates} from 'slices/currentPlayer/currentPlayerSlice'
-import reactotron from "initializers/reactotron.js";
 
 const tournamentsPerPage = 5
 

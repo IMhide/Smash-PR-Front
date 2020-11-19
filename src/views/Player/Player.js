@@ -1,15 +1,14 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import template from "./Player.jsx";
-import getCircuitPlayer from 'lib/getCircuitPlayer'
-import getPlayerRatings from 'lib/getPlayerRatings'
 import { useParams } from "react-router-dom";
 import { selectCurrentCircuit } from "slices/currentCircuit/currentCirtcuitSlice.js";
 import {
   updateCircuitPlayerInfoAsync,
   updatePlayerTournamentsAsync,
   selectCurrentPlayer,
-  updatePlayerRatingsAsync
+  updatePlayerRatingsAsync,
+  updateTournamentsOpponentSearch,
 } from "slices/currentPlayer/currentPlayerSlice.js";
 
 //
@@ -26,14 +25,11 @@ const Player = () => {
   const playerInfo = player.stats
   const tournaments = player.tournaments.values
   const tournamentState = player.tournaments.apiCallState
-  const ratings = player.matches.values 
+  const ratings = player.matches.values
   const ratingState = player.matches.apiCallState
   const playerRanking = player.stats
   const totalParticipants = player.participantsCount
-
-
-  const [search, setSearch] = useState('')
-
+  const search = player.matches.opponentSearch
 
   useEffect(() => {
     dispatch(updateCircuitPlayerInfoAsync(rankingId, playerId))
@@ -42,13 +38,12 @@ const Player = () => {
   }, [rankingId, playerId, dispatch])
 
   const handleSearch = (e) => {
-    const tmp = e.target.value
-    setSearch({value: tmp})
+    updateTournamentsOpponentSearch(e.target.value)
   }
 
-  let displayedRatings = ratings 
+  let displayedRatings = ratings
   if (search.length > 0)
-    displayedRatings = ratings.filter((rating) => (rating.opponent.toLowerCase().includes(search.value)))
+    displayedRatings = ratings.filter((rating) => (rating.opponent.toLowerCase().includes(search)))
 
   return template({
     rankingName, playerRanking, playerInfo, totalParticipants,

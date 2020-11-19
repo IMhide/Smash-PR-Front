@@ -14,6 +14,7 @@ import updateCircuitPlayerInfoAsyncAction from './updateCircuitPlayerInfoAsyncAc
 import updatePlayerTournamentsAsyncAction from './updatePlayerTournamentsAsyncAction'
 import updatePlayerRatingsAsyncAction from './updatePlayerRatingsAsyncAction'
 import updateParticipantsCountAction from './updateParticipantsCountAction'
+import updateTournamentsOpponentSearchAction from './updateTournamentsOpponentSearchAction'
 
 export const currentPlayerApiCallStates = {
     INITIALIZED: 0,
@@ -32,6 +33,7 @@ export const currentPlayerSlice = createSlice({
         matches: {
             values: [],
             apiCallState: currentPlayerApiCallStates.INITIALIZED,
+            opponentSearch: '',
         },
         tournaments: {
             values: [],
@@ -63,6 +65,7 @@ export const currentPlayerSlice = createSlice({
         updateMatchesApiCallState: updateMatchesApiCallStateAction,
         updateTournaments: updateTournamentsAction,
         updateTournamentsApiCallState: updateTournamentsApiCallStateAction,
+        updateTournamentsOpponentSearch: updateTournamentsOpponentSearchAction, 
     }
 });
 
@@ -73,7 +76,8 @@ export const updatePlayerRatingsAsync = updatePlayerRatingsAsyncAction
 export const {
     updateId, updateName, updatePosition, updateScore, updateMatchesStats,
     updateSetsStats, updateMatches, updateMatchesApiCallState, updateTournaments,
-    updateTournamentsApiCallState, updateCircuitPlayerApiCallState, updateParticipantsCount
+    updateTournamentsApiCallState, updateCircuitPlayerApiCallState, updateParticipantsCount,
+    updateTournamentsOpponentSearch,
 } = currentPlayerSlice.actions
 
 
