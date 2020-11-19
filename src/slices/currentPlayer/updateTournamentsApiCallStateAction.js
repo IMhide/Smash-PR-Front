@@ -1,8 +1,8 @@
-import {currentPlayerApiCallStates} from './currentPlayerSlice'
+import { currentPlayerApiCallStates } from './currentPlayerSlice'
 
-export const updateTournamentsApiStateAction = (state, action) => {
+export const updateTournamentsApiCallStateAction = (state, action) => {
     if (Object.values(currentPlayerApiCallStates).includes(action.payload))
         state.tournaments.apiCallState = action.payload
-} 
+}
 
-export default updateTournamentsApiStateAction
+export default updateTournamentsApiCallStateAction

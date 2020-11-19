@@ -1,5 +1,5 @@
 export const updateTournamentsAction = (state, action) => {
-    state.tournaments.value = action.payload
+    state.tournaments.values = action.payload
 } 
 
 export default updateTournamentsAction

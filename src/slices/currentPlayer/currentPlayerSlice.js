@@ -7,8 +7,13 @@ import updateMatchesStatsAction from './updateMatchesStatsAction'
 import updateSetsStatsAction from './updateSetsStatsAction'
 import updateMatchesAction from './updateMatchesAction'
 import updateMatchesApiCallStateAction from './updateMatchesApiCallStateAction'
-import updateTournamentsApiCallStateAction from './updateMatchesApiCallStateAction'
+import updateTournamentsApiCallStateAction from './updateTournamentsApiCallStateAction'
 import updateTournamentsAction from './updateTournamentsAction'
+import updateCircuitPlayerApiCallStateAction from './updateCircuitPlayerApiCallStateAction'
+import updateCircuitPlayerInfoAsyncAction from './updateCircuitPlayerInfoAsyncAction'
+import updatePlayerTournamentsAsyncAction from './updatePlayerTournamentsAsyncAction'
+import updatePlayerRatingsAsyncAction from './updatePlayerRatingsAsyncAction'
+import updateParticipantsCountAction from './updateParticipantsCountAction'
 
 export const currentPlayerApiCallStates = {
     INITIALIZED: 0,
@@ -22,6 +27,8 @@ export const currentPlayerSlice = createSlice({
     initialState: {
         id: undefined,
         name: undefined,
+        participantsCount: undefined,
+        apiCallState: currentPlayerApiCallStates.INITIALIZED,
         matches: {
             values: [],
             apiCallState: currentPlayerApiCallStates.INITIALIZED,
@@ -33,8 +40,14 @@ export const currentPlayerSlice = createSlice({
         stats: {
             position: undefined,
             score: undefined,
-            matches: undefined,
-            sets: undefined
+            matches: {
+                win: undefined,
+                lose: undefined,
+            },
+            sets: {
+                win: undefined,
+                lose: undefined,
+            },
         }
     },
     reducers: {
@@ -42,19 +55,28 @@ export const currentPlayerSlice = createSlice({
         updateName: updateNameAction,
         updatePosition: updatePositionAction,
         updateScore: updateScoreAction,
+        updateParticipantsCount: updateParticipantsCountAction,
+        updateCircuitPlayerApiCallState: updateCircuitPlayerApiCallStateAction,
         updateMatchesStats: updateMatchesStatsAction,
         updateSetsStats: updateSetsStatsAction,
         updateMatches: updateMatchesAction,
         updateMatchesApiCallState: updateMatchesApiCallStateAction,
         updateTournaments: updateTournamentsAction,
-        updateTournamentsApiCallState: updateTournamentsApiCallStateAction,    }
+        updateTournamentsApiCallState: updateTournamentsApiCallStateAction,
+    }
 });
+
+export const updateCircuitPlayerInfoAsync = updateCircuitPlayerInfoAsyncAction
+export const updatePlayerTournamentsAsync = updatePlayerTournamentsAsyncAction
+export const updatePlayerRatingsAsync = updatePlayerRatingsAsyncAction
 
 export const {
     updateId, updateName, updatePosition, updateScore, updateMatchesStats,
-    updateSetsStats, updateMatches, updateMatchesApiState, updateTournaments,
-    updateTournamentsApiState
- } = currentPlayerSlice.actions
+    updateSetsStats, updateMatches, updateMatchesApiCallState, updateTournaments,
+    updateTournamentsApiCallState, updateCircuitPlayerApiCallState, updateParticipantsCount
+} = currentPlayerSlice.actions
+
+
 
 export const selectCurrentPlayer = (state) => (state.currentPlayer)
 export default currentPlayerSlice.reducer

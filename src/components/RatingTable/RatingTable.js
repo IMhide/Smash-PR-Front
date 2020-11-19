@@ -2,6 +2,7 @@ import React from "react";
 import template from "./RatingTable.jsx";
 import { Box, CircularProgress } from "@material-ui/core";
 import useStyle from './RatingTable.style'
+import {currentPlayerApiCallStates} from 'slices/currentPlayer/currentPlayerSlice'
 
 const ratingsPerPage = 10
 
@@ -19,13 +20,13 @@ const RatingTable = ({ ratings, state, search, handleSearch }) => {
   const displayedRatings=  ratings.slice(start_at, stop_at )
 
   switch (state) {
-    case 'pending':
+    case currentPlayerApiCallStates.SENT:
       return (
         <Box display="flex" alignItems="center" justifyContent="center">
           <CircularProgress />
         </Box>
       )
-    case 'success':
+    case currentPlayerApiCallStates.SUCCESS:
       return template({ classes, displayedRatings, page, total, handleChangePage, search, handleSearch });
     default:
       return ''
