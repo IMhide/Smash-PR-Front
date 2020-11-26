@@ -2,7 +2,11 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import template from "./Player.jsx";
 import { useParams } from "react-router-dom";
-import { selectCurrentCircuit } from "slices/currentCircuit/currentCirtcuitSlice.js";
+import {
+  selectCurrentCircuit,
+  updateCurrentCircuitAsync,
+  updateId
+} from "slices/currentCircuit/currentCirtcuitSlice.js";
 import {
   updateCircuitPlayerInfoAsync,
   updatePlayerTournamentsAsync,
@@ -10,11 +14,6 @@ import {
   updatePlayerRatingsAsync,
   updateTournamentsOpponentSearch,
 } from "slices/currentPlayer/currentPlayerSlice.js";
-
-//
-// TODO : Quand une page joueur est chargé
-// si le circuit n'est pas load il faut faire une requete
-//
 
 const Player = () => {
   const { playerId, rankingId } = useParams()
@@ -25,10 +24,14 @@ const Player = () => {
   const search = player.matches.opponentSearch
 
   useEffect(() => {
+    if (rankingId !== circuit.id) {
+      dispatch(updateId(rankingId))
+      dispatch(updateCurrentCircuitAsync(rankingId))
+    }
     dispatch(updateCircuitPlayerInfoAsync(rankingId, playerId))
     dispatch(updatePlayerTournamentsAsync(rankingId, playerId))
     dispatch(updatePlayerRatingsAsync(rankingId, playerId))
-  }, [rankingId, playerId, dispatch])
+  }, [rankingId, playerId, dispatch, circuit.id])
 
   const handleSearch = (e) => {
     dispatch(updateTournamentsOpponentSearch(e.target.value))
