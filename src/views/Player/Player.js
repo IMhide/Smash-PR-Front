@@ -21,6 +21,7 @@ const Player = () => {
   const dispatch = useDispatch()
   const player = useSelector(selectCurrentPlayer)
   const circuit = useSelector(selectCurrentCircuit)
+
   const rankingName = circuit.name
   const playerInfo = player.stats
   const tournaments = player.tournaments.values
@@ -46,6 +47,7 @@ const Player = () => {
     displayedRatings = ratings.filter((rating) => (rating.opponent.toLowerCase().includes(search)))
 
   return template({
+    player, circuit,
     rankingName, playerRanking, playerInfo, totalParticipants,
     tournaments, tournamentState, ratings, ratingState, search, handleSearch
   });

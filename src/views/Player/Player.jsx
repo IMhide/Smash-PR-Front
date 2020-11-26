@@ -4,16 +4,17 @@ import { Grid, Card, CardHeader, CardContent, Typography } from '@material-ui/co
 import PlacementTable from 'components/PlacementTable'
 import RatingTable from 'components/RatingTable'
 
-function template({ rankingName, playerRanking, playerInfo, totalParticipants, tournaments, tournamentState, ratings, ratingState, search, handleSearch }) {
+function template({ player, circuit,
+  rankingName, playerRanking, playerInfo, totalParticipants, tournaments, tournamentState, ratings, ratingState, search, handleSearch }) {
   return (
     <div className="player">
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
           <Card>
-            <CardHeader title={`Classement dans le ${rankingName}`} />
+            <CardHeader title={`Classement dans le ${circuit.name}`} />
             <CardContent>
               <Typography variant="h4" component="h1">
-                <strong>{playerRanking.name}</strong>
+                <strong>{player.name}</strong>
               </Typography>
             </CardContent>
           </Card>

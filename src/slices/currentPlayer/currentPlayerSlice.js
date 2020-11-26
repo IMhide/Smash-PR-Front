@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import updateIdAction from './updateIdAction'
 import updateNameAction from './updateNameAction'
 import updateScoreAction from './updateScoreAction'
 import updatePositionAction from './updatePositionAction'
@@ -26,7 +25,6 @@ export const currentPlayerApiCallStates = {
 export const currentPlayerSlice = createSlice({
     name: 'currentPlayer',
     initialState: {
-        id: undefined,
         name: undefined,
         participantsCount: undefined,
         apiCallState: currentPlayerApiCallStates.INITIALIZED,
@@ -53,7 +51,6 @@ export const currentPlayerSlice = createSlice({
         }
     },
     reducers: {
-        updateId: updateIdAction,
         updateName: updateNameAction,
         updatePosition: updatePositionAction,
         updateScore: updateScoreAction,
