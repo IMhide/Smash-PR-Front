@@ -6,7 +6,7 @@ import {currentPlayerApiCallStates} from 'slices/currentPlayer/currentPlayerSlic
 
 const ratingsPerPage = 10
 
-const RatingTable = ({ ratings, state, search, handleSearch }) => {
+const RatingTable = ({ ratings, state, handleSearch }) => {
   const classes = useStyle()
   const [page, setPage] = React.useState(0)
 
@@ -27,7 +27,7 @@ const RatingTable = ({ ratings, state, search, handleSearch }) => {
         </Box>
       )
     case currentPlayerApiCallStates.SUCCESS:
-      return template({ classes, displayedRatings, page, total, handleChangePage, search, handleSearch });
+      return template({ classes, displayedRatings, page, total, handleChangePage, handleSearch });
     default:
       return ''
   }

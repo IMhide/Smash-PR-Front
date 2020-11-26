@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import template from "./Player.jsx";
 import { useParams } from "react-router-dom";
@@ -21,15 +21,7 @@ const Player = () => {
   const dispatch = useDispatch()
   const player = useSelector(selectCurrentPlayer)
   const circuit = useSelector(selectCurrentCircuit)
-
-  const rankingName = circuit.name
-  const playerInfo = player.stats
-  const tournaments = player.tournaments.values
-  const tournamentState = player.tournaments.apiCallState
   const ratings = player.matches.values
-  const ratingState = player.matches.apiCallState
-  const playerRanking = player.stats
-  const totalParticipants = player.participantsCount
   const search = player.matches.opponentSearch
 
   useEffect(() => {
@@ -39,18 +31,14 @@ const Player = () => {
   }, [rankingId, playerId, dispatch])
 
   const handleSearch = (e) => {
-    updateTournamentsOpponentSearch(e.target.value)
+    dispatch(updateTournamentsOpponentSearch(e.target.value))
   }
 
   let displayedRatings = ratings
   if (search.length > 0)
     displayedRatings = ratings.filter((rating) => (rating.opponent.toLowerCase().includes(search)))
 
-  return template({
-    player, circuit,
-    rankingName, playerRanking, playerInfo, totalParticipants,
-    tournaments, tournamentState, ratings, ratingState, search, handleSearch
-  });
+  return template({ player, circuit, handleSearch, displayedRatings });
 }
 
 export default Player;

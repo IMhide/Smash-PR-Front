@@ -9,11 +9,11 @@ import "./RatingTable.css";
 
 const template = ({
   displayedRatings, page, total, handleChangePage,
-  search, handleSearch, classes
+  handleSearch, classes
 }) => {
   return (
     <>
-      <TextField id="playerName" label="Chercher un opposant" className={classes.searchInput} value={search} onChange={handleSearch} />
+      <TextField id="playerName" label="Chercher un opposant" className={classes.searchInput} onChange={handleSearch} />
       <TableContainer>
         <Table aria-label="simple table">
           <TableHead>

@@ -4,8 +4,7 @@ import { Grid, Card, CardHeader, CardContent, Typography } from '@material-ui/co
 import PlacementTable from 'components/PlacementTable'
 import RatingTable from 'components/RatingTable'
 
-function template({ player, circuit,
-  rankingName, playerRanking, playerInfo, totalParticipants, tournaments, tournamentState, ratings, ratingState, search, handleSearch }) {
+function template({ player, circuit, handleSearch, displayedRatings }) {
   return (
     <div className="player">
       <Grid container spacing={3}>
@@ -26,7 +25,7 @@ function template({ player, circuit,
             <CardHeader title="Classement" />
             <CardContent>
               <Typography align="center">
-                <span className='big_info'>{playerRanking.position}</span>/{totalParticipants}
+                <span className='big_info'>{player.stats.position}</span>/{player.participantsCount}
               </Typography>
             </CardContent>
           </Card>
@@ -35,7 +34,7 @@ function template({ player, circuit,
           <Card>
             <CardHeader title="Score" />
             <Typography align="center">
-              <CardContent><span className="big_info">{playerRanking.score}</span> pts</CardContent>
+              <CardContent><span className="big_info">{player.stats.score}</span> pts</CardContent>
             </Typography>
           </Card>
         </Grid>
@@ -44,9 +43,9 @@ function template({ player, circuit,
             <CardHeader title="Matches" />
             <Typography align="center">
               <CardContent>
-                <span className="big_info green">{playerInfo.matches.win}</span>
+                <span className="big_info green">{player.stats.matches.win}</span>
                 <span className="big_info "> - </span>
-                <span className="big_info red">{playerInfo.matches.loss}</span>
+                <span className="big_info red">{player.stats.matches.loss}</span>
               </CardContent>
             </Typography>
           </Card>
@@ -56,9 +55,9 @@ function template({ player, circuit,
             <CardHeader title="Sets" />
             <Typography align="center">
               <CardContent>
-                <span className="big_info green">{playerInfo.sets.win}</span>
+                <span className="big_info green">{player.stats.sets.win}</span>
                 <span className="big_info" > - </span>
-                <span className="big_info red">{playerInfo.sets.loss}</span>
+                <span className="big_info red">{player.stats.sets.loss}</span>
               </CardContent>
             </Typography>
           </Card>
@@ -69,7 +68,10 @@ function template({ player, circuit,
           <Card>
             <CardHeader title="Historique des matches"></CardHeader>
             <CardContent>
-              <RatingTable ratings={ratings} state={ratingState} handleSearch={handleSearch} search={search} />
+              <RatingTable ratings={displayedRatings}
+                state={player.matches.apiCallState}
+                handleSearch={handleSearch}
+                search={player.matches.opponentSearch} />
             </CardContent>
           </Card>
         </Grid>
@@ -77,7 +79,7 @@ function template({ player, circuit,
           <Card>
             <CardHeader title="Historique des tournois"></CardHeader>
             <CardContent>
-              <PlacementTable tournaments={tournaments} state={tournamentState} />
+              <PlacementTable tournaments={player.tournaments.values} state={player.tournaments.apiCallState} />
             </CardContent>
           </Card>
         </Grid>
