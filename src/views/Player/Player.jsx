@@ -33,33 +33,35 @@ function template({ player, circuit, handleSearch, displayedRatings }) {
         <Grid item xs={6} sm={6} md={3} lg={3} xl={3}>
           <Card>
             <CardHeader title="Score" />
-            <Typography align="center">
-              <CardContent><span className="big_info">{player.stats.score}</span> pts</CardContent>
+            <CardContent>
+              <Typography align="center">
+                <span className="big_info">{player.stats.score}</span> pts
             </Typography>
+            </CardContent>
           </Card>
         </Grid>
         <Grid item xs={6} sm={6} md={3} lg={3} xl={3}>
           <Card>
             <CardHeader title="Matches" />
-            <Typography align="center">
-              <CardContent>
+            <CardContent>
+              <Typography align="center">
                 <span className="big_info green">{player.stats.matches.win}</span>
                 <span className="big_info "> - </span>
                 <span className="big_info red">{player.stats.matches.loss}</span>
-              </CardContent>
-            </Typography>
+              </Typography>
+            </CardContent>
           </Card>
         </Grid>
         <Grid item xs={6} sm={6} md={3} lg={3} xl={3}>
           <Card>
             <CardHeader title="Sets" />
-            <Typography align="center">
-              <CardContent>
+            <CardContent>
+              <Typography align="center">
                 <span className="big_info green">{player.stats.sets.win}</span>
                 <span className="big_info" > - </span>
                 <span className="big_info red">{player.stats.sets.loss}</span>
-              </CardContent>
-            </Typography>
+              </Typography>
+            </CardContent>
           </Card>
         </Grid>
       </Grid>
