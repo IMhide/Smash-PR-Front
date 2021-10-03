@@ -5,10 +5,9 @@ import { StylesMedium, StylesBig } from "./DesktopSidebar.style";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { useSelector, useDispatch } from "react-redux";
 import {
-  selectCircuit,
-  updateCircuitsAsync,
-} from "slices/circuits/circuitSlice";
-import { selectMetaDatas } from "slices/metaDatas/metaDatasSlice";
+  selectRankings,
+  updateRankingsAsync,
+} from "slices/rankings/rankingsSlice";
 
 const DesktopSidebar = (props) => {
   let classes;
@@ -26,27 +25,18 @@ const DesktopSidebar = (props) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(updateCircuitsAsync());
+    dispatch(updateRankingsAsync());
   }, [dispatch]);
 
   const handleMenu = () => {
     setMenuClicked(!menuClicked);
   };
 
-  const circuits = useSelector(selectCircuit);
-  const metaDatas = useSelector(selectMetaDatas);
-
-  const ignoreIds = [metaDatas.allTimeId, metaDatas.currentId];
-  const majors = circuits.majors.filter(
-    (major) => !ignoreIds.includes(major.id)
-  );
-  const minors = circuits.minors;
+  const rankings = useSelector(selectRankings);
 
   return template({
+    rankings,
     classes,
-    majors,
-    minors,
-    metaDatas,
     drawerOpen,
     clsx,
     handleMenu,
