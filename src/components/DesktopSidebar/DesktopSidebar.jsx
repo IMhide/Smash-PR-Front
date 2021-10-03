@@ -50,17 +50,6 @@ function template({ classes, majors, minors, metaDatas, drawerOpen, clsx, handle
         </List>
         <Divider />
         <List>
-          {minors.map((minor) => (
-            <NavLink key={minor['id']} to={`/circuits/${minor['id']}`} activeClassName='menu-active' className='item-link'>
-              <ListItem key={minor['id']} button text={`Minor - ${minor['name']}`} className="menu-item">
-                <ListItemIcon className='menuIcon'><ArrowRightIcon /></ListItemIcon>
-                <ListItemText primary={`Reg. - ${minor['name']}`} />
-              </ListItem>
-            </NavLink>
-          ))}
-        </List>
-        <Divider />
-        <List>
           <NavLink to='/faq' activeClassName='menu-active' className='item-link'>
             <ListItem button text="FAQ">
               <ListItemIcon className='menuIcon'><ArrowRightIcon /></ListItemIcon>
