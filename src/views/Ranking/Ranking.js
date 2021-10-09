@@ -1,26 +1,31 @@
+import React, { useState } from "react";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+
+import template from "./Ranking.jsx";
+import useStyle from "./Ranking.style";
+import { selectNavigation } from "slices/navigation/navagationSlice.js";
+
 import {
   updateSearch,
   togglePlacement,
   selectSearch,
 } from "slices/search/searchSlice";
-import template from "./Ranking.jsx";
-import useStyle from "./Ranking.style";
-import {
-  selectRankings,
-  updateRankingsAsync,
-} from "slices/rankings/rankingsSlice";
+import { selectRankings } from "slices/rankings/rankingsSlice.js";
+
+import WaitingCircle from "components/WaitingCircle/WaitingCircle.js";
 
 const Ranking = () => {
-  const { id } = useParams();
   const classes = useStyle();
+
+  const [displayedRanking, setDisplayedRanking] = useState(null);
 
   const rankings = useSelector(selectRankings);
   const search = useSelector(selectSearch);
-
+  const navigation = useSelector(selectNavigation);
   const dispatch = useDispatch();
+
+  let displayedStanding = [];
 
   const handleSearch = (e) => {
     dispatch(updateSearch(e.target.value));
@@ -30,24 +35,36 @@ const Ranking = () => {
     dispatch(togglePlacement());
   };
 
-  // let displayedRanking = rankings.current.standing;
+  useEffect(() => {
+    if (navigation.ranking_id === null) {
+      setDisplayedRanking(rankings.current);
+    } else {
+      setDisplayedRanking(
+        rankings.previous.find(
+          (ranking) => navigation.ranking_id === ranking.id
+        )
+      );
+    }
+    console.log("Effect called");
+  }, [navigation, rankings]);
 
-  let displayedRanking = 12;
+  if (displayedRanking !== null) {
+    displayedStanding = displayedRanking.standing;
+  }
+  console.log(displayedRanking);
+  console.log(displayedStanding);
 
-  if (search.value.length > 0)
-    displayedRanking = rankings.current.standing.filter((player) =>
-      player.name.toLowerCase().includes(search.value)
-    );
-
-  return "";
-
-  return template({
-    classes,
-    currentCircuit: rankings.current,
-    displayedRanking,
-    handlePlacement,
-    handleSearch,
-  });
+  if (displayedRanking === null || displayedStanding === null) {
+    return <WaitingCircle />;
+  } else {
+    return template({
+      classes,
+      displayedRanking,
+      displayedStanding,
+      handlePlacement,
+      handleSearch,
+    });
+  }
 };
 
 export default Ranking;

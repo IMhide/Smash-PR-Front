@@ -5,15 +5,15 @@ import RankingTable from 'components/RankingTable'
 import RankingSearch from 'components/RankingSearch'
 import TournamentTable from 'components/TournamentTable'
 
-function template({ classes, currentCircuit, displayedRanking, handleSearch, handlePlacement}) {
+function template({ classes, displayedRanking, displayedStanding, handleSearch, handlePlacement}) {
   return (
     <div className="ranking">
       <Grid container spacing={3}>
         <Grid item  xs={12} sm={12} md={7} lg={8} xl={8}>
           <Card>
-            <CardHeader title={currentCircuit.name} />
+            <CardHeader title={displayedRanking.name} />
             <CardContent>
-              <RankingTable ranking={displayedRanking} state={currentCircuit.ranking.apiCallState} circuitId={currentCircuit.id} />
+              <RankingTable standing={displayedStanding}  rankingId={displayedRanking.id} />
             </CardContent>
           </Card>
         </Grid>
@@ -22,7 +22,7 @@ function template({ classes, currentCircuit, displayedRanking, handleSearch, han
           <Card className={classes.tournamentBox}>
             <CardHeader title='Tournois' />
             <CardContent>
-              <TournamentTable tournaments={currentCircuit.tournaments.value} state={currentCircuit.tournaments.apiCallState} />
+              <TournamentTable tournaments={[]} state={[]} />
             </CardContent>
           </Card>
         </Grid>

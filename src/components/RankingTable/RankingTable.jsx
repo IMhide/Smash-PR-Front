@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import placement from 'assets/images/placement.png'
 
 
-const template = ({ displayedRanking, page, handleChangePage, total, circuitId }) => {
+const template = ({ standing, page, handleChangePage, total, rankingId}) => {
 
   return (
     <TableContainer>
@@ -18,14 +18,14 @@ const template = ({ displayedRanking, page, handleChangePage, total, circuitId }
           </TableRow>
         </TableHead>
         <TableBody>
-          {displayedRanking.map(player => (
-            <TableRow key={player['id']} className={player['match_count'] < 12 ? 'placement-row' : ''}>
-              <TableCell>{player['position']}</TableCell>
+          {standing.map(player => (
+            <TableRow key={player.id}>
+              <TableCell>{player.position}</TableCell>
               <TableCell>
-                <Link to={{ pathname: `/circuits/${circuitId}/players/${player['id']}` }}>
-                  {player['name']}
+                <Link to={{ pathname: `/circuits/${rankingId}/players/${player.id}` }}>
+                  {player.name}
                 </Link>
-                {player['match_count'] < 12 ?
+                {false ?
                   <Tooltip title="Classement temporaire" placement='left' arrow>
                     <img src={placement} className='placement-logo' alt='placement-logo' />
                   </Tooltip>

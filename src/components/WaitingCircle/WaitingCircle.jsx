@@ -1,15 +1,12 @@
 import React from "react";
-import template from "./TournamentTable.jsx";
 import { Box, CircularProgress } from "@material-ui/core";
 
-const tournamentsPerPage = 5;
-
-const TournamentTable = ({ tournaments, state }) => {
+const template = () => {
   return (
     <Box display="flex" alignItems="center" justifyContent="center">
       <CircularProgress />
     </Box>
   );
-};
+}
 
-export default TournamentTable;
+export default template;
