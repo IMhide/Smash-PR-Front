@@ -13,7 +13,7 @@ import {
 } from "slices/search/searchSlice";
 import { selectRankings } from "slices/rankings/rankingsSlice.js";
 
-import WaitingCircle from "components/WaitingCircle/WaitingCircle.js";
+import { Box, CircularProgress } from "@material-ui/core";
 
 const Ranking = () => {
   const classes = useStyle();
@@ -45,17 +45,18 @@ const Ranking = () => {
         )
       );
     }
-    console.log("Effect called");
   }, [navigation, rankings]);
 
   if (displayedRanking !== null) {
     displayedStanding = displayedRanking.standing;
   }
-  console.log(displayedRanking);
-  console.log(displayedStanding);
 
   if (displayedRanking === null || displayedStanding === null) {
-    return <WaitingCircle />;
+    return (
+      <Box display="flex" alignItems="center" justifyContent="center">
+        <CircularProgress />
+      </Box>
+    );
   } else {
     return template({
       classes,

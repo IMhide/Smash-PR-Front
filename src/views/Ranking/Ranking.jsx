@@ -22,7 +22,7 @@ function template({ classes, displayedRanking, displayedStanding, handleSearch, 
           <Card className={classes.tournamentBox}>
             <CardHeader title='Tournois' />
             <CardContent>
-              <TournamentTable tournaments={[]} state={[]} />
+              <TournamentTable tournaments={displayedRanking.tournaments} />
             </CardContent>
           </Card>
         </Grid>
