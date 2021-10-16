@@ -19,13 +19,12 @@ const Ranking = () => {
   const classes = useStyle();
 
   const [displayedRanking, setDisplayedRanking] = useState(null);
+  const [displayedStanding, setDisplayedStanding] = useState(null);
 
   const rankings = useSelector(selectRankings);
   const search = useSelector(selectSearch);
   const navigation = useSelector(selectNavigation);
   const dispatch = useDispatch();
-
-  let displayedStanding = [];
 
   const handleSearch = (e) => {
     dispatch(updateSearch(e.target.value));
@@ -47,9 +46,17 @@ const Ranking = () => {
     }
   }, [navigation, rankings]);
 
-  if (displayedRanking !== null) {
-    displayedStanding = displayedRanking.standing;
-  }
+  useEffect(() => {
+    if (displayedRanking !== null) {
+      if (search.value.length > 0)
+        setDisplayedStanding(
+          displayedRanking.standing.filter((player) =>
+            player.name.toLowerCase().includes(search.value.toLowerCase())
+          )
+        );
+      else setDisplayedStanding(displayedRanking.standing);
+    }
+  }, [search.value, displayedRanking]);
 
   if (displayedRanking === null || displayedStanding === null) {
     return (
