@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import placement from 'assets/images/placement.png'
 
 
-const template = ({ standing, page, handleChangePage, total, rankingId}) => {
+const template = ({ displayedStanding, page, handleChangePage, total, rankingId}) => {
 
   return (
     <TableContainer>
@@ -18,8 +18,8 @@ const template = ({ standing, page, handleChangePage, total, rankingId}) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {standing.map(player => (
-            <TableRow key={player.id}>
+          {displayedStanding.map(player => (
+            <TableRow key={`player_${rankingId}_${player.id}`}>
               <TableCell>{player.position}</TableCell>
               <TableCell>
                 <Link to={{ pathname: `/circuits/${rankingId}/players/${player.id}` }}>

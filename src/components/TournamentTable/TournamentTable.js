@@ -12,8 +12,8 @@ const TournamentTable = ({ tournaments }) => {
   };
 
   const total = tournaments.length;
-  const start_at = page * 5;
-  const stop_at = (page + 1) * 5;
+  const start_at = page * tournamentsPerPage;
+  const stop_at = (page + 1) * tournamentsPerPage;
   const displayedTournaments = tournaments.slice(start_at, stop_at);
 
   return template({ displayedTournaments, page, total, handleChangePage });
