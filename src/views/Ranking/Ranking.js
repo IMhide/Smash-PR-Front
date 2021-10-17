@@ -66,13 +66,6 @@ const Ranking = () => {
     }
   }, [search.value, displayedRanking, search.placement]);
 
-  useEffect(() => {
-    if (displayedRanking !== null)
-      if (search.placement === true)
-        setDisplayedStanding(displayedRanking.tmp_standing);
-      else setDisplayedStanding(displayedRanking.standing);
-  }, [displayedRanking, search.placement]);
-
   if (displayedRanking === null || displayedStanding === null) {
     return (
       <Box display="flex" alignItems="center" justifyContent="center">
