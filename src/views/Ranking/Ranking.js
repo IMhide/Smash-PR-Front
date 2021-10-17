@@ -34,6 +34,7 @@ const Ranking = () => {
     dispatch(togglePlacement());
   };
 
+  // Navigation handler
   useEffect(() => {
     if (navigation.ranking_id === null) {
       setDisplayedRanking(rankings.current);
@@ -46,17 +47,31 @@ const Ranking = () => {
     }
   }, [navigation, rankings]);
 
+  // Display & Filtring Stadings handler
   useEffect(() => {
     if (displayedRanking !== null) {
+      const onGoingPlacement = search.placement
+        ? displayedRanking.tmp_standing
+        : displayedRanking.standing;
+
       if (search.value.length > 0)
         setDisplayedStanding(
-          displayedRanking.standing.filter((player) =>
+          onGoingPlacement.filter((player) =>
             player.name.toLowerCase().includes(search.value.toLowerCase())
           )
         );
-      else setDisplayedStanding(displayedRanking.standing);
+      else {
+        setDisplayedStanding(onGoingPlacement);
+      }
     }
-  }, [search.value, displayedRanking]);
+  }, [search.value, displayedRanking, search.placement]);
+
+  useEffect(() => {
+    if (displayedRanking !== null)
+      if (search.placement === true)
+        setDisplayedStanding(displayedRanking.tmp_standing);
+      else setDisplayedStanding(displayedRanking.standing);
+  }, [displayedRanking, search.placement]);
 
   if (displayedRanking === null || displayedStanding === null) {
     return (
