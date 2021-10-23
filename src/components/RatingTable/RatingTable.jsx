@@ -2,35 +2,36 @@ import React from "react";
 
 import {
   TableContainer, Table, TableHead, TableCell, TableBody, TableRow,
-  TableFooter, TablePagination, TextField
+  TableFooter, TablePagination
 } from "@material-ui/core";
 
 import "./RatingTable.css";
 
 const template = ({
-  displayedRatings, page, total, handleChangePage,
-  handleSearch, classes
+  displayedTournaments, page, total, handleChangePage,
 }) => {
   return (
-    <>
-      <TextField id="playerName" label="Chercher un opposant" className={classes.searchInput} onChange={handleSearch} />
       <TableContainer>
         <Table aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell>&nbsp;</TableCell>
-              <TableCell>Joueur</TableCell>
-              <TableCell>Score</TableCell>
+              <TableCell>Tournois</TableCell>
+              <TableCell>Tier</TableCell>
+              <TableCell>Seed</TableCell>
+              <TableCell>Position</TableCell>
+              <TableCell>Match count</TableCell>
               <TableCell>Points</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {displayedRatings.map(rating => (
-              <TableRow key={rating.id}>
-                <TableCell>{rating.is_winner ? <span className="green">W</span> : <span className="red">L</span>}</TableCell>
-                <TableCell>{rating.opponent}</TableCell>
-                <TableCell>{rating.winner_score} - {rating.looser_score}</TableCell>
-                <TableCell>{rating.score}</TableCell>
+            {displayedTournaments.map(tournament => (
+              <TableRow key={`ratings_${tournament.id}`}>
+                <TableCell>{tournament.name}</TableCell>
+                <TableCell>{tournament.tier}</TableCell>
+                <TableCell>{tournament.seed}</TableCell>
+                <TableCell>{tournament.placement}</TableCell>
+                <TableCell>{'5 - 0'}</TableCell>
+                <TableCell>{'+666'}</TableCell>
               </TableRow>
             ))}
           </TableBody>
@@ -47,7 +48,6 @@ const template = ({
           </TableFooter>
         </Table>
       </TableContainer>
-    </>
   );
 };
 

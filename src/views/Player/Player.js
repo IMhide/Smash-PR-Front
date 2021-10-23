@@ -3,6 +3,11 @@ import { useSelector, useDispatch } from "react-redux";
 import template from "./Player.jsx";
 import { useParams } from "react-router-dom";
 import { selectRankings } from "slices/rankings/rankingsSlice.js";
+import {
+  updatePlayerId,
+  updateRankingId,
+} from "slices/navigation/navagationSlice.js";
+
 import { Box, CircularProgress } from "@material-ui/core";
 import getPlayerRankingInfos from "lib/getPlayerRankingInfos";
 
@@ -10,15 +15,18 @@ const Player = () => {
   const [currentPlayer, setCurrentPlayer] = useState(null);
   const [currentRanking, setCurrentRanking] = useState(null);
   const rankings = useSelector(selectRankings);
-
+  const dispatch = useDispatch();
   const { playerId, rankingId } = useParams();
 
   useEffect(() => {
+    dispatch(updatePlayerId(playerId));
+    dispatch(updateRankingId(rankingId));
+
     getPlayerRankingInfos(rankingId, playerId).then((response) => {
       setCurrentPlayer(response.data.player_standing);
       setCurrentRanking(response.data.ranking);
     });
-  }, [playerId, rankingId]);
+  }, [dispatch, playerId, rankingId]);
 
   if (currentPlayer === null || currentRanking === null)
     return (

@@ -4,7 +4,7 @@ import { Grid, Card, CardHeader, CardContent, Typography } from '@material-ui/co
 import PlacementTable from 'components/PlacementTable'
 import RatingTable from 'components/RatingTable'
 
-function template({ currentPlayer, ranking, handleSearch, displayedRatings }) {
+function template({ currentPlayer, ranking }) {
   return (
     <div className="player">
       <Grid container spacing={3}>
@@ -58,7 +58,7 @@ function template({ currentPlayer, ranking, handleSearch, displayedRatings }) {
           <Card>
             <CardHeader title="Historique"></CardHeader>
             <CardContent>
-              <RatingTable ratings={[]} />
+              <RatingTable rankingId={ranking.id} playerId={currentPlayer.id} />
             </CardContent>
           </Card>
         </Grid>
