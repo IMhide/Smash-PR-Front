@@ -30,8 +30,8 @@ const template = ({
                 <TableCell>{tournament.tier}</TableCell>
                 <TableCell>{tournament.seed}</TableCell>
                 <TableCell>{tournament.placement}</TableCell>
-                <TableCell>{'5 - 0'}</TableCell>
-                <TableCell>{'+666'}</TableCell>
+                <TableCell>{tournament.match_count}</TableCell>
+                <TableCell>{tournament.point_diff}</TableCell>
               </TableRow>
             ))}
           </TableBody>

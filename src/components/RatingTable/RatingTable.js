@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import getPlayerRankingTournaments from "lib/getPlayerRankingTournaments";
 import { selectNavigation } from "slices/navigation/navagationSlice.js";
-import LogUtils from "lib/LogUtils";
 import template from "./RatingTable.jsx";
 
 const tournamentsPerPage = 10;
@@ -27,7 +26,6 @@ const RatingTable = ({ rankingId, playerId }) => {
   const start_at = page * tournamentsPerPage;
   const stop_at = (page + 1) * tournamentsPerPage;
   const displayedTournaments = tournaments.slice(start_at, stop_at);
-  LogUtils.log("Foobar", displayedTournaments);
 
   return template({
     displayedTournaments,
