@@ -20,7 +20,7 @@ const template = ({
               <TableCell>Seed</TableCell>
               <TableCell>Position</TableCell>
               <TableCell>Match count</TableCell>
-              <TableCell>Points</TableCell>
+              <TableCell>Diff</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
