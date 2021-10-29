@@ -41,7 +41,9 @@ const Ranking = () => {
       setDisplayedRanking(rankings.current);
     } else {
       setDisplayedRanking(
-        rankings.previous.find((ranking) => navigation.ranking_id == ranking.id)
+        rankings.previous.find(
+          (ranking) => parseInt(navigation.ranking_id) === parseInt(ranking.id)
+        )
       );
     }
   }, [navigation.ranking_id, rankings]);
