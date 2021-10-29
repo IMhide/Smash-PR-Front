@@ -17,7 +17,6 @@ const template = ({
             <TableRow>
               <TableCell>Tournois</TableCell>
               <TableCell>Tier</TableCell>
-              <TableCell>Seed</TableCell>
               <TableCell>Position</TableCell>
               <TableCell>Match count</TableCell>
               <TableCell>Diff</TableCell>
@@ -28,7 +27,6 @@ const template = ({
               <TableRow key={`ratings_${tournament.id}`}>
                 <TableCell>{tournament.name}</TableCell>
                 <TableCell>{tournament.tier}</TableCell>
-                <TableCell>{tournament.seed}</TableCell>
                 <TableCell>{tournament.placement}</TableCell>
                 <TableCell>{tournament.match_count}</TableCell>
                 <TableCell>{tournament.point_diff}</TableCell>
