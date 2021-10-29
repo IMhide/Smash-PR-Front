@@ -37,9 +37,9 @@ function template({ rankings, classes, drawerOpen, clsx, handleMenu }) {
         <List>
           {rankings.previous && rankings.previous.map((ranking) => (
             <NavLink key={ranking['id']} to={`/rankings/${ranking['id']}`} activeClassName='menu-active' className='item-link'>
-              <ListItem key={ranking['id']} button text={`Major - ${ranking['name']}`} className="menu-item">
+              <ListItem key={ranking['id']} button text={ranking['name']} className="menu-item">
                 <ListItemIcon className='menuIcon'><ArrowRightIcon /></ListItemIcon>
-                <ListItemText primary={`Nat. - ${ranking['name']}`} />
+                <ListItemText primary={ranking['name']} />
               </ListItem>
             </NavLink>
           ))}

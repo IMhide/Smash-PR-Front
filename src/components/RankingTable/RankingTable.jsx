@@ -22,7 +22,7 @@ const template = ({ displayedStanding, page, handleChangePage, total, rankingId}
             <TableRow key={`player_${rankingId}_${player.id}`}>
               <TableCell>{player.position}</TableCell>
               <TableCell>
-                <Link to={{ pathname: `/circuits/${rankingId}/players/${player.id}` }}>
+                <Link to={{ pathname: `/rankings/${rankingId}/players/${player.id}` }}>
                   {player.name}
                 </Link>
                 {false ?

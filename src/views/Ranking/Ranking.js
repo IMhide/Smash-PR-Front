@@ -16,7 +16,7 @@ import { Box, CircularProgress } from "@material-ui/core";
 
 const Ranking = () => {
   const classes = useStyle();
-  const { rankingId } = useParams();
+  const { id } = useParams();
   const [displayedRanking, setDisplayedRanking] = useState(null);
   const [displayedStanding, setDisplayedStanding] = useState(null);
   const rankings = useSelector(selectRankings);
@@ -32,22 +32,23 @@ const Ranking = () => {
 
   // Set Navigation
   useEffect(() => {
-    dispatch(updateRankingId(rankingId));
-  }, [dispatch, rankingId]);
+    dispatch(updateRankingId(id));
+  }, [dispatch, id]);
 
   // Navigation handler
   useEffect(() => {
-    if (navigation.rankingId === undefined) {
+    if (navigation.ranking_id === undefined) {
       setDisplayedRanking(rankings.current);
     } else {
       setDisplayedRanking(
-        rankings.previous.find((ranking) => navigation.rankingId === ranking.id)
+        rankings.previous.find((ranking) => navigation.ranking_id == ranking.id)
       );
     }
-  }, [navigation.rankingId, rankingId, rankings]);
+  }, [navigation.ranking_id, rankings]);
 
   // Display & Filtring Stadings handler
   useEffect(() => {
+
     if (displayedRanking) {
       const onGoingPlacement = search.placement
         ? displayedRanking.tmp_standing
