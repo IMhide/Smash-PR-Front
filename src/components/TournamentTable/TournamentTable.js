@@ -1,6 +1,5 @@
 import React from "react";
 import template from "./TournamentTable.jsx";
-import { Box, CircularProgress } from "@material-ui/core";
 
 const tournamentsPerPage = 5;
 

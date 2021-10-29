@@ -1,6 +1,5 @@
 import React from "react";
 import template from "./RankingTable.jsx";
-import { CircularProgress, Box } from "@material-ui/core";
 
 const playerPerPage = 50;
 

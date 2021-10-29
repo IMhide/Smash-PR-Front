@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import template from "./Player.jsx";
 import { useParams } from "react-router-dom";
-import { selectRankings } from "slices/rankings/rankingsSlice.js";
 import {
   updatePlayerId,
   updateRankingId,
@@ -13,7 +12,6 @@ import getPlayerRankingInfos from "lib/getPlayerRankingInfos";
 const Player = () => {
   const [currentPlayer, setCurrentPlayer] = useState(null);
   const [currentRanking, setCurrentRanking] = useState(null);
-  const rankings = useSelector(selectRankings);
   const dispatch = useDispatch();
   const { playerId, rankingId } = useParams();
 

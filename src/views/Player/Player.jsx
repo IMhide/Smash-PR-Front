@@ -1,7 +1,6 @@
 import "./Player.css";
 import React from "react";
 import { Grid, Card, CardHeader, CardContent, Typography } from '@material-ui/core'
-import PlacementTable from 'components/PlacementTable'
 import RatingTable from 'components/RatingTable'
 
 function template({ currentPlayer, ranking }) {
