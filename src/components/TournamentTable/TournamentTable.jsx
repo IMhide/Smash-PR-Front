@@ -15,10 +15,10 @@ const template = ({ displayedTournaments, page, total, handleChangePage }) => {
         </TableHead>
         <TableBody>
           {displayedTournaments.map(tournament => (
-            <TableRow key={tournament[0]}>
-              <TableCell>{tournament[1]}</TableCell>
-              <TableCell>{tournament[2]}</TableCell>
-              <TableCell>{tournament[3]}</TableCell>
+            <TableRow key={`tournament_${tournament.id}`}>
+              <TableCell>{tournament.name}</TableCell>
+              <TableCell>{tournament.tier}</TableCell>
+              <TableCell>{tournament.remote_participant_count}</TableCell>
             </TableRow>
           ))}
         </TableBody>

@@ -1,28 +1,37 @@
-import "./RatingTable.css";
 import React from "react";
-import { TableContainer, Table, TableHead, TableCell, TableBody, TableRow, TableFooter, TablePagination, TextField } from "@material-ui/core";
 
-const template = ({ displayedRatings, page, total, handleChangePage, search, handleSearch, classes }) => {
+import {
+  TableContainer, Table, TableHead, TableCell, TableBody, TableRow,
+  TableFooter, TablePagination
+} from "@material-ui/core";
+
+import "./RatingTable.css";
+
+const template = ({
+  displayedTournaments, page, total, handleChangePage,
+}) => {
   return (
-    <React.Fragment>
-        <TextField id="playerName" label="Chercher un opposant" className={classes.searchInput} value={search} onChange={handleSearch} />
       <TableContainer>
         <Table aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell>&nbsp;</TableCell>
-              <TableCell>Joueur</TableCell>
-              <TableCell>Score</TableCell>
-              <TableCell>Points</TableCell>
+              <TableCell>Tournois</TableCell>
+              <TableCell>Tier</TableCell>
+              <TableCell>Seed</TableCell>
+              <TableCell>Position</TableCell>
+              <TableCell>Match count</TableCell>
+              <TableCell>Diff</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {displayedRatings.map(rating => (
-              <TableRow key={rating.id}>
-                <TableCell>{rating.is_winner ? <span className="green">W</span> : <span className="red">L</span>}</TableCell>
-                <TableCell>{rating.opponent}</TableCell>
-                <TableCell>{rating.winner_score} - {rating.looser_score}</TableCell>
-                <TableCell>{rating.score}</TableCell>
+            {displayedTournaments.map(tournament => (
+              <TableRow key={`ratings_${tournament.id}`}>
+                <TableCell>{tournament.name}</TableCell>
+                <TableCell>{tournament.tier}</TableCell>
+                <TableCell>{tournament.seed}</TableCell>
+                <TableCell>{tournament.placement}</TableCell>
+                <TableCell>{tournament.match_count}</TableCell>
+                <TableCell>{tournament.point_diff}</TableCell>
               </TableRow>
             ))}
           </TableBody>
@@ -39,7 +48,6 @@ const template = ({ displayedRatings, page, total, handleChangePage, search, han
           </TableFooter>
         </Table>
       </TableContainer>
-    </React.Fragment>
   );
 };
 

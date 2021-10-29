@@ -1,39 +1,38 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
+import getPlayerRankingTournaments from "lib/getPlayerRankingTournaments";
+import { selectNavigation } from "slices/navigation/navagationSlice.js";
 import template from "./RatingTable.jsx";
-import { Box, CircularProgress } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core";
 
-const useStyle = makeStyles({
-  searchInput: {
-    width: '100%'
-  }
-})
+const tournamentsPerPage = 10;
 
-const RatingTable = ({ ratings, state, search, handleSearch }) => {
-  const classes = useStyle()
-  const [page, setPage] = React.useState(0)
-
+const RatingTable = ({ rankingId, playerId }) => {
+  const [page, setPage] = React.useState(0);
+  const [tournaments, setTournaments] = React.useState([]);
+  const navigation = useSelector(selectNavigation);
   const handleChangePage = (_, newPage) => {
-    setPage(newPage)
-  }
+    setPage(newPage);
+  };
 
-  const total = ratings.length
-  const start_at = page * 10
-  const stop_at = (page + 1) * 10 
-  const displayedRatings=  ratings.slice(start_at, stop_at )
+  useEffect(() => {
+    if (navigation.player_id && navigation.ranking_id)
+      getPlayerRankingTournaments(
+        navigation.ranking_id,
+        navigation.player_id
+      ).then((response) => setTournaments(response.data));
+  }, [navigation.player_id, navigation.ranking_id, playerId, rankingId]);
 
-  switch (state) {
-    case 'pending':
-      return (
-        <Box display="flex" alignItems="center" justifyContent="center">
-          <CircularProgress />
-        </Box>
-      )
-    case 'success':
-      return template({ classes, displayedRatings, page, total, handleChangePage, search, handleSearch });
-    default:
-      return ''
-  }
-}
+  const total = tournaments.length;
+  const start_at = page * tournamentsPerPage;
+  const stop_at = (page + 1) * tournamentsPerPage;
+  const displayedTournaments = tournaments.slice(start_at, stop_at);
+
+  return template({
+    displayedTournaments,
+    page,
+    total,
+    handleChangePage,
+  });
+};
 
 export default RatingTable;

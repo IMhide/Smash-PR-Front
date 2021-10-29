@@ -8,14 +8,14 @@ import appbarLogo from 'assets/images/logo_appbar.png'
 import MenuIcon from '@material-ui/icons/Menu';
 import { NavLink } from "react-router-dom";
 
-function template({ classes, majors, minors, metaInfo, drawerOpen, clsx, handleMenu }) {
+function template({ rankings, classes, drawerOpen, clsx, handleMenu }) {
   return (
     <React.Fragment>
       <AppBar position="fixed" className={clsx(classes.appBar, classes.bgb, { [classes.appBarShift]: drawerOpen })}>
         <Toolbar>
           <IconButton color="inherit" aria-label="open drawer" onClick={handleMenu} edge="start" className={clsx(classes.menuButton)} >
-            <ArrowBackIosIcon className={{ [classes.hide]: !drawerOpen }} />
-            <MenuIcon className={{ [classes.hide]: drawerOpen }} />
+            <ArrowBackIosIcon className={clsx({ [classes.hide]: !drawerOpen })} />
+            <MenuIcon className={clsx({ [classes.hide]: drawerOpen })} />
           </IconButton>
           <img src={appbarLogo} className="pr-logo-appbar" alt="Logo PR France" />
         </Toolbar>
@@ -24,37 +24,22 @@ function template({ classes, majors, minors, metaInfo, drawerOpen, clsx, handleM
         <img src={logo} className="pr-logo" alt="Logo PR France" />
         <Divider />
         <List>
-          <NavLink key={metaInfo['current']} to={`/`} activeClassName='menu-active' className='item-link' exact>
-            <ListItem key={metaInfo['current']} button text="Ranking saison en cours" className="menu-item">
+          {rankings && rankings.current &&
+          <NavLink key={rankings.current.id} to={`/`} activeClassName='menu-active' className='item-link' exact>
+            <ListItem key={rankings.current.id} button text={rankings.current.name} className="menu-item">
               <ListItemIcon className='menuIcon'><ArrowRightIcon /></ListItemIcon>
-              <ListItemText primary="Ranking saison en cours" />
+              <ListItemText primary={rankings.current.name} />
             </ListItem>
           </NavLink>
-          <NavLink key={metaInfo['all_time']} to={`/circuits/${metaInfo['all_time']}`} activeClassName='menu-active' className='item-link'>
-            <ListItem key={metaInfo['all_time']} button text="Ranking All Time" className="menu-item">
-              <ListItemIcon className='menuIcon'><ArrowRightIcon /></ListItemIcon>
-              <ListItemText primary="Ranking All Time" />
-            </ListItem>
-          </NavLink>
+          }
         </List>
         <Divider />
         <List>
-          {majors.map((major) => (
-            <NavLink key={major['id']} to={`/circuits/${major['id']}`} activeClassName='menu-active' className='item-link'>
-              <ListItem key={major['id']} button text={`Major - ${major['name']}`} className="menu-item">
+          {rankings.previous && rankings.previous.map((ranking) => (
+            <NavLink key={ranking['id']} to={`/rankings/${ranking['id']}`} activeClassName='menu-active' className='item-link'>
+              <ListItem key={ranking['id']} button text={ranking['name']} className="menu-item">
                 <ListItemIcon className='menuIcon'><ArrowRightIcon /></ListItemIcon>
-                <ListItemText primary={`Nat. - ${major['name']}`} />
-              </ListItem>
-            </NavLink>
-          ))}
-        </List>
-        <Divider />
-        <List>
-          {minors.map((minor) => (
-            <NavLink key={minor['id']} to={`/circuits/${minor['id']}`} activeClassName='menu-active' className='item-link'>
-              <ListItem key={minor['id']} button text={`Minor - ${minor['name']}`} className="menu-item">
-                <ListItemIcon className='menuIcon'><ArrowRightIcon /></ListItemIcon>
-                <ListItemText primary={`Reg. - ${minor['name']}`} />
+                <ListItemText primary={ranking['name']} />
               </ListItem>
             </NavLink>
           ))}

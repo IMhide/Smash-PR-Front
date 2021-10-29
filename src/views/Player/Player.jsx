@@ -4,79 +4,61 @@ import { Grid, Card, CardHeader, CardContent, Typography } from '@material-ui/co
 import PlacementTable from 'components/PlacementTable'
 import RatingTable from 'components/RatingTable'
 
-function template({ rankingName, playerRanking, playerInfo, totalParticipants, tournaments, tournamentState, ratings, ratingState, search, handleSearch }) {
+function template({ currentPlayer, ranking }) {
   return (
     <div className="player">
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
           <Card>
-            <CardHeader title={`Classement dans le ${rankingName}`} />
+            <CardHeader title={`Classement dans la ${ranking.name}`} />
             <CardContent>
               <Typography variant="h4" component="h1">
-                <strong>{playerRanking.name}</strong>
+                <strong>{currentPlayer.standing.name}</strong>
               </Typography>
             </CardContent>
           </Card>
         </Grid>
       </Grid>
       <Grid container spacing={3}>
-        <Grid item xs={6} sm={6} md={3} lg={3} xl={3}>
+        <Grid item xs={6} sm={6} md={4} lg={4} xl={4}>
           <Card>
             <CardHeader title="Classement" />
             <CardContent>
               <Typography align="center">
-                <span className='big_info'>{playerRanking.position}</span>/{totalParticipants}
+                <span className='big_info'>{currentPlayer.standing.position}</span>/{ranking.placed_player_count}
               </Typography>
             </CardContent>
           </Card>
         </Grid>
-        <Grid item xs={6} sm={6} md={3} lg={3} xl={3}>
+        <Grid item xs={6} sm={6} md={4} lg={4} xl={4}>
           <Card>
             <CardHeader title="Score" />
-            <Typography align="center">
-              <CardContent><span className="big_info">{playerRanking.score}</span> pts</CardContent>
+            <CardContent>
+              <Typography align="center">
+                <span className="big_info">{currentPlayer.standing.score}</span> pts
             </Typography>
+            </CardContent>
           </Card>
         </Grid>
-        <Grid item xs={6} sm={6} md={3} lg={3} xl={3}>
+        <Grid item xs={6} sm={6} md={4} lg={4} xl={4}>
           <Card>
             <CardHeader title="Matches" />
-            <Typography align="center">
-              <CardContent>
-                <span className="big_info green">{playerInfo.matches.win}</span>
+            <CardContent>
+              <Typography align="center">
+                <span className="big_info green">{currentPlayer.match_count.won}</span>
                 <span className="big_info "> - </span>
-                <span className="big_info red">{playerInfo.matches.loss}</span>
-              </CardContent>
-            </Typography>
-          </Card>
-        </Grid>
-        <Grid item xs={6} sm={6} md={3} lg={3} xl={3}>
-          <Card>
-            <CardHeader title="Sets" />
-            <Typography align="center">
-              <CardContent>
-                <span className="big_info green">{playerInfo.sets.win}</span>
-                <span className="big_info" > - </span>
-                <span className="big_info red">{playerInfo.sets.loss}</span>
-              </CardContent>
-            </Typography>
+                <span className="big_info red">{currentPlayer.match_count.lost}</span>
+              </Typography>
+            </CardContent>
           </Card>
         </Grid>
       </Grid>
       <Grid container spacing={3}>
-        <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
+        <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
           <Card>
-            <CardHeader title="Historique des matches"></CardHeader>
+            <CardHeader title="Historique"></CardHeader>
             <CardContent>
-              <RatingTable ratings={ratings} state={ratingState} handleSearch={handleSearch} search={search} />
-            </CardContent>
-          </Card>
-        </Grid>
-        <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
-          <Card>
-            <CardHeader title="Historique des tournois"></CardHeader>
-            <CardContent>
-              <PlacementTable tournaments={tournaments} state={tournamentState} />
+              <RatingTable rankingId={ranking.id} playerId={currentPlayer.id} />
             </CardContent>
           </Card>
         </Grid>

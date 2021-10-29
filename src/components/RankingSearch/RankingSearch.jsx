@@ -7,8 +7,8 @@ const template = ({ classes, search, handleSearch, handlePlacement, placement })
     <CardHeader title="Chercher un joueur" />
     <CardContent>
       <form noValidate autoComplete="off">
-        <TextField id="playerName" label="Pseudo" className={classes.searchInput} value={search} onChange={handleSearch} />
-        <FormControlLabel label="Joueur en placement"  onChange={handlePlacement} value={placement} control={
+        <TextField id="playerName" label="Pseudo" className={classes.searchInput} onChange={handleSearch} />
+        <FormControlLabel label="Joueur en placement"  onChange={handlePlacement} control={
           <Switch />
         } />
       </form>

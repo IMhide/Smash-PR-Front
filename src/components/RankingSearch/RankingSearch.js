@@ -1,11 +1,5 @@
 import template from "./RankingSearch.jsx";
-import { makeStyles } from "@material-ui/core";
-
-const useStyle = makeStyles({
-  searchInput: {
-    width: '100%'
-  }
-})
+import useStyle from "./RankingSearch.style"
 
 const RankingSearch = ({placement, search, handleSearch, handlePlacement}) => {
   const classes = useStyle()

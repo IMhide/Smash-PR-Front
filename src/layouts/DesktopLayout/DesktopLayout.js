@@ -1,4 +1,4 @@
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 import template from "./DesktopLayout.jsx";
 import { makeStyles } from "@material-ui/core";
 
@@ -7,32 +7,31 @@ const StylesLarge = makeStyles({
     flexGrow: 1,
   },
   layout: {
-    display: 'flex',
-  }
-})
+    display: "flex",
+  },
+});
 
 const Styles = makeStyles({
   content: {
     flexGrow: 1,
-    marginTop: '85px'
+    marginTop: "85px",
   },
   layout: {
-    display: 'flex',
-  }
-})
+    display: "flex",
+  },
+});
 
 const DesktopLayout = (props) => {
   let classes;
 
-
-  const largeScreen = useMediaQuery('(min-width:1400px)');
+  const largeScreen = useMediaQuery("(min-width:1400px)");
   if (largeScreen) {
-    classes = StylesLarge()
+    classes = StylesLarge();
   } else {
-    classes =  Styles()
+    classes = Styles();
   }
 
   return template({ props, classes });
-}
+};
 
 export default DesktopLayout;

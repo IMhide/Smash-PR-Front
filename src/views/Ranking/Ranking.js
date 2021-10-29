@@ -1,106 +1,86 @@
-import { useEffect, useState } from "react"
-import { makeStyles } from '@material-ui/core'
-import template from "./Ranking.jsx";
-import getCircuitRanking from 'lib/getCircuitRanking.js'
-import getCircuitTournaments from 'lib/getCircuitTournaments.js'
-import getMetaInfo from 'lib/getMetaInfo.js'
-import getCircuit from 'lib/getCircuit.js'
+import React, { useState } from "react";
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-
-const useStyle = makeStyles((theme) => (
-  {
-    tournamentBox:
-    {
-      marginTop: theme.spacing(3),
-    }
-  }
-))
+import template from "./Ranking.jsx";
+import useStyle from "./Ranking.style";
+import { selectNavigation } from "slices/navigation/navagationSlice.js";
+import {
+  updateSearch,
+  togglePlacement,
+  selectSearch,
+} from "slices/search/searchSlice";
+import { updateRankingId } from "slices/navigation/navagationSlice.js";
+import { selectRankings } from "slices/rankings/rankingsSlice.js";
+import { Box, CircularProgress } from "@material-ui/core";
 
 const Ranking = () => {
-  const { id } = useParams()
-  const classes = useStyle()
-
-  const [rankingId, setRankingId] = useState()
-  const [rankingName, setRankingName] = useState('ranking')
-  const [rankingState, setRankingState] = useState('initial')
-  const [ranking, setRanking] = useState([])
-  const [cachedRanking, setCachedRanking] = useState([])
-  const [tournamentsState, setTournamentsState] = useState('initial')
-  const [tournaments, setTournaments] = useState([])
-  const [search, setSearch] = useState('')
-  const [placement, setPlacement] = useState(false)
-  const [metaInfo, setMetaInfo] = useState(false)
-
-  useEffect(() => {  // eslint-disable-line
-    if (id === undefined)
-      setRankingId(metaInfo['current'])
-    else
-      setRankingId(id)
-  });
-
-  useEffect(() => {
-    getMetaInfo().then((response) => {
-      setMetaInfo(response.data)
-    }).catch((error) => {
-      console.log('Something Went Wrong')
-      console.log(error)
-    })
-  }, [])
-
-  useEffect(() => {
-    getCircuit(rankingId).then((response) => {
-      const name = response.data.name
-      const tier = response.data.category
-      setRankingName(`Ranking ${name} - ${tier}`)
-    }).catch((error) => {
-      console.log('Something Went Wrong')
-      console.log(error)
-    })
-  }, [rankingId])
-
-  useEffect(() => {
-    setRankingState('pending')
-    getCircuitRanking(rankingId, placement).then((response) => {
-      setCachedRanking(response.data.data)
-      setRanking(response.data.data)
-      setSearch('')
-      setRankingState('success')
-    }).catch((error) => {
-      setRankingState('error')
-      console.log('Something Went Wrong')
-      console.log(error)
-    })
-  }, [rankingId, placement])
-
-  useEffect(() => {
-    setTournamentsState('pending')
-    getCircuitTournaments(rankingId).then((response) => {
-      setTournamentsState('success')
-      setTournaments(response.data.data)
-    }).catch((error) => {
-      setTournamentsState('error')
-      console.log('Something Went Wrong')
-      console.log(error)
-    })
-  }, [rankingId])
-
+  const classes = useStyle();
+  const { id } = useParams();
+  const [displayedRanking, setDisplayedRanking] = useState(null);
+  const [displayedStanding, setDisplayedStanding] = useState(null);
+  const rankings = useSelector(selectRankings);
+  const search = useSelector(selectSearch);
+  const navigation = useSelector(selectNavigation);
+  const dispatch = useDispatch();
   const handleSearch = (e) => {
-    const tmp = e.target.value
-    setSearch(tmp)
-    if (tmp.length > 0) {
-      const filteredRanking = cachedRanking.filter((player) => (player['name'].toLowerCase().includes(tmp.toLowerCase())))
-      setRanking(filteredRanking)
-    }
-    else {
-      setRanking(cachedRanking)
-    }
-  }
-
+    dispatch(updateSearch(e.target.value));
+  };
   const handlePlacement = () => {
-    setPlacement(!placement)
-  }
+    dispatch(togglePlacement());
+  };
 
-  return template({ classes, ranking, rankingState, tournaments, tournamentsState, search, placement, handlePlacement, handleSearch, rankingName, rankingId });
-}
+  // Set Navigation
+  useEffect(() => {
+    dispatch(updateRankingId(id));
+  }, [dispatch, id]);
+
+  // Navigation handler
+  useEffect(() => {
+    if (navigation.ranking_id === undefined) {
+      setDisplayedRanking(rankings.current);
+    } else {
+      setDisplayedRanking(
+        rankings.previous.find((ranking) => navigation.ranking_id == ranking.id)
+      );
+    }
+  }, [navigation.ranking_id, rankings]);
+
+  // Display & Filtring Stadings handler
+  useEffect(() => {
+    if (displayedRanking) {
+      const onGoingPlacement = search.placement
+        ? displayedRanking.tmp_standing
+        : displayedRanking.standing;
+
+      if (search.value.length > 0)
+        setDisplayedStanding(
+          onGoingPlacement.filter((player) =>
+            player.name.toLowerCase().includes(search.value.toLowerCase())
+          )
+        );
+      else {
+        setDisplayedStanding(onGoingPlacement);
+      }
+    }
+  }, [search.value, displayedRanking, search.placement]);
+
+  // Rendering
+  if (displayedRanking === null || displayedStanding === null) {
+    return (
+      <Box display="flex" alignItems="center" justifyContent="center">
+        <CircularProgress />
+      </Box>
+    );
+  } else {
+    return template({
+      classes,
+      displayedRanking,
+      displayedStanding,
+      handlePlacement,
+      handleSearch,
+    });
+  }
+};
 
 export default Ranking;
