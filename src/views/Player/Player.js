@@ -7,7 +7,6 @@ import {
   updatePlayerId,
   updateRankingId,
 } from "slices/navigation/navagationSlice.js";
-
 import { Box, CircularProgress } from "@material-ui/core";
 import getPlayerRankingInfos from "lib/getPlayerRankingInfos";
 
