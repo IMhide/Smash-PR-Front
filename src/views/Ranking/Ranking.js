@@ -48,7 +48,6 @@ const Ranking = () => {
 
   // Display & Filtring Stadings handler
   useEffect(() => {
-
     if (displayedRanking) {
       const onGoingPlacement = search.placement
         ? displayedRanking.tmp_standing
